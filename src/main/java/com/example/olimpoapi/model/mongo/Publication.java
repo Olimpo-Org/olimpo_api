@@ -1,11 +1,11 @@
-package com.example.olimpoapi.model;
+package com.example.olimpoapi.model.mongo;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
 
-@Document(collection = "your_collection_name")
+@Document(collection = "publications")
 public class Publication {
 
     @Field("community_id")

@@ -1,4 +1,4 @@
-package com.example.olimpoapi.model;
+package com.example.olimpoapi.model.mongo;
 
 import jakarta.persistence.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
