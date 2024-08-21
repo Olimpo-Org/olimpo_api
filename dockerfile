@@ -1,6 +1,7 @@
 FROM maven:3.8.3-openjdk-17 as Build
 
 WORKDIR /app
+
 COPY pom.xml .
 COPY src ./src
 
