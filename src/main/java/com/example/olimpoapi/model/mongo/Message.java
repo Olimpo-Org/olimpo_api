@@ -26,6 +26,13 @@ public class Message {
     @Field("content")
     private String content;
 
+    public Message(String chatId, String senderId, String senderName, Date sendedAt, String content) {
+        this.chatId = chatId;
+        this.senderId = senderId;
+        this.senderName = senderName;
+        this.sendedAt = sendedAt;
+        this.content = content;
+    }
     public Message() {
     }
 

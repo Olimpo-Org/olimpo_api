@@ -8,14 +8,12 @@ import jakarta.persistence.Table;
 @Table(name = "conta")
 public class User {
     @Id
+
     String user_id;
     String user_email;
     String password;
     String phone;
     String profile_image;
-
-    public User() {
-    }
 
     public User(String user_id, String user_email, String password, String phone, String profile_image) {
         this.user_id = user_id;
@@ -24,7 +22,8 @@ public class User {
         this.phone = phone;
         this.profile_image = profile_image;
     }
-
+    public User() {
+    }
     public String getUser_id() {
         return user_id;
     }

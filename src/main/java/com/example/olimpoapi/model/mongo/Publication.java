@@ -1,16 +1,25 @@
 package com.example.olimpoapi.model.mongo;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-
 import java.util.List;
 
 @Document(collection = "publications")
 public class Publication {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id;
 
+    @NotNull(message = "Community id cannot be null")
     @Field("community_id")
     private String communityId;
 
+    @NotNull(message = "Sender id cannot be null")
     @Field("sender_id")
     private String senderId;
 
@@ -18,8 +27,10 @@ public class Publication {
     private String senderName;
 
     @Field("images")
-    private List<String> images; // Assuming Base64 images are stored as strings
+    private List<String> images;
 
+    @NotNull(message = "Description cannot be null")
+    @Max(message = "Description cannot be longer than 500 characters", value = 300)
     @Field("description")
     private String description;
 
@@ -29,9 +40,12 @@ public class Publication {
     @Field("comments")
     private List<Comment> comments;
 
+    @NotNull(message = "Tag cannot be null")
+    @Field("tag")
+    private String tag;
 
     public Publication(String communityId, String senderId, String senderName, List<String> images,
-                       String description, List<String> likes, List<Comment> comments) {
+                       String description, List<String> likes, List<Comment> comments, String tag) {
         this.communityId = communityId;
         this.senderId = senderId;
         this.senderName = senderName;
@@ -39,9 +53,18 @@ public class Publication {
         this.description = description;
         this.likes = likes;
         this.comments = comments;
+        this.tag = tag;
     }
 
     public Publication() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getCommunityId() {
@@ -98,5 +121,12 @@ public class Publication {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 }

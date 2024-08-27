@@ -1,20 +1,26 @@
 package com.example.olimpoapi.model.mongo;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "comments")
 public class Comment {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
+    @NotNull(message = "Sender id cannot be null")
     @Field("sender_id")
     private String senderId;
 
     @Field("sender_name")
     private String senderName;
 
+    @NotNull(message = "Content cannot be null")
     @Field("content")
     private String content;
 
