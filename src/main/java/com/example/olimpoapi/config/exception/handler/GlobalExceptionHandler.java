@@ -1,6 +1,6 @@
-package com.example.olimpoapi.exception.handler;
+package com.example.olimpoapi.config.exception.handler;
 
-import com.example.olimpoapi.exception.CustomBadRequestException;
+import com.example.olimpoapi.config.exception.CustomBadRequestException;
 import com.example.olimpoapi.exception.CustomNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

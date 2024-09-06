@@ -1,6 +1,5 @@
 package com.example.olimpoapi.config.exception;
 
-import com.example.olimpoapi.exception.CustomBadRequestException;
 import com.example.olimpoapi.exception.CustomGenericException;
 import com.example.olimpoapi.exception.CustomNotFoundException;
 import com.example.olimpoapi.exception.CustomUnauthorizedException;
