@@ -1,22 +1,22 @@
 package com.example.olimpoapi.model.redis;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.index.Indexed;
 
+import java.io.Serializable;
 import java.util.Date;
 
-@Entity
-@Table(name = "message")
-public class Message {
+@RedisHash("Message")
+public class Message implements Serializable {
+
     @Id
     private String id;
 
+    @Indexed
     private String chatId;
 
+    @Indexed
     private String senderId;
 
     private String senderName;
@@ -32,6 +32,7 @@ public class Message {
         this.sendedAt = sendedAt;
         this.content = content;
     }
+
     public Message() {
     }
 
