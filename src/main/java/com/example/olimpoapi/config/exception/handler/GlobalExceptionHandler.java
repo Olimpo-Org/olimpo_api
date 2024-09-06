@@ -1,4 +1,4 @@
-package com.example.olimpoapi.config;
+package com.example.olimpoapi.exception.handler;
 
 import com.example.olimpoapi.exception.CustomBadRequestException;
 import com.example.olimpoapi.exception.CustomNotFoundException;

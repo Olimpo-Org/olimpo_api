@@ -1,7 +1,7 @@
 package com.example.olimpoapi.controller;
 
 import com.example.olimpoapi.model.postgres.User;
-import com.example.olimpoapi.model.redis.Login;
+import com.example.olimpoapi.model.utils.Login;
 import com.example.olimpoapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -1,29 +1,28 @@
-package com.example.olimpoapi.model.mongo;
+package com.example.olimpoapi.model.redis;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import jakarta.persistence.Table;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.redis.core.index.Indexed;
 
 import java.util.Date;
 
-@Document(collection = "messages")
+@Entity
+@Table(name = "message")
 public class Message {
     @Id
     private String id;
 
-    @Field("chat_id")
     private String chatId;
 
-    @Field("sender_id")
     private String senderId;
 
-    @Field("sender_name")
     private String senderName;
 
-    @Field("sended_at")
     private Date sendedAt;
 
-    @Field("content")
     private String content;
 
     public Message(String chatId, String senderId, String senderName, Date sendedAt, String content) {

@@ -1,8 +1,5 @@
-package com.example.olimpoapi.model.redis;
+package com.example.olimpoapi.model.utils;
 
-import org.springframework.data.redis.core.RedisHash;
-
-@RedisHash("login")
 public class Login {
     private String email;
     private String password;

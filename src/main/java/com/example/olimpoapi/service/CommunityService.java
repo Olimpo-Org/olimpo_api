@@ -1,7 +1,9 @@
 package com.example.olimpoapi.service;
 
-import com.example.olimpoapi.repository.CommunityRepository;
+import com.example.olimpoapi.repository.jpa.CommunityRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CommunityService {
     private final CommunityRepository communityRepository;
     private CommunityService(CommunityRepository communityRepository) {

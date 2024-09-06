@@ -1,4 +1,4 @@
-package com.example.olimpoapi.security;
+package com.example.olimpoapi.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

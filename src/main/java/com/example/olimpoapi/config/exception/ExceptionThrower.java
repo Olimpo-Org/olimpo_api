@@ -1,9 +1,13 @@
-package com.example.olimpoapi.exception;
+package com.example.olimpoapi.config.exception;
 
+import com.example.olimpoapi.exception.CustomBadRequestException;
+import com.example.olimpoapi.exception.CustomGenericException;
+import com.example.olimpoapi.exception.CustomNotFoundException;
+import com.example.olimpoapi.exception.CustomUnauthorizedException;
+import com.example.olimpoapi.exception.CustomNullPointerException;
 public class ExceptionThrower {
     private ExceptionThrower() {
     }
-
     public static void throwNotFoundException(String message) {
         throw new CustomNotFoundException(message);
     }
@@ -27,6 +31,4 @@ public class ExceptionThrower {
     public static void throwGenericException(String message) {
         throw new CustomGenericException(message);
     }
-
-
 }

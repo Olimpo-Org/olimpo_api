@@ -1,22 +1,23 @@
-package com.example.olimpoapi.model.mongo;
+package com.example.olimpoapi.model.postgres;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import org.apache.catalina.User;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
 
-@Document(collection = "communities")
+@Entity
+@Table(name = "community")
 public class Community {
     @Id
     private String id;
 
-    @Field("community_name")
     private String communityName;
 
-    @Field("users")
-    private List<User> users;
+//    private List<User> users;
 
     public Community() {
     }
@@ -24,7 +25,7 @@ public class Community {
     public Community(String id, String communityName, List<User> users) {
         this.id = id;
         this.communityName = communityName;
-        this.users = users;
+//        this.users = users;
     }
 
     public String getId() {
@@ -43,11 +44,11 @@ public class Community {
         this.communityName = communityName;
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
+//    public List<User> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(List<User> users) {
+//        this.users = users;
+//    }
 }
