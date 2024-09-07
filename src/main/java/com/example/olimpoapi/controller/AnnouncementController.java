@@ -1,11 +1,14 @@
 package com.example.olimpoapi.controller;
 
+import com.example.olimpoapi.model.mongo.Announcement;
 import com.example.olimpoapi.service.AnnouncementService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import javax.xml.validation.Validator;
+import java.util.List;
 
 @RestController
 @RequestMapping("/v1/announcement")
@@ -16,4 +19,38 @@ public class AnnouncementController {
     public AnnouncementController(AnnouncementService announcementService) {
         this.announcementService = announcementService;
     }
+
+    @GetMapping("/get/services/{communityId}")
+    public ResponseEntity<String> getAllServices(
+            @PathVariable("communityId") String communityId
+    ) {
+        List<Announcement> announcements = announcementService.getAllServices(communityId);
+        return ResponseEntity.ok().body(announcements.toString());
+    }
+
+    @GetMapping("/get/sales/{communityId}")
+    public ResponseEntity<String> getAllSales(
+            @PathVariable("communityId") String communityId
+    ) {
+        List<Announcement> announcements = announcementService.getAllSales(communityId);
+        return ResponseEntity.ok().body(announcements.toString());
+    }
+
+    @GetMapping("/get/donations/{communityId}")
+    public ResponseEntity<String> getAllDonations(
+            @PathVariable("communityId") String communityId
+    ) {
+        List<Announcement> announcements = announcementService.getAllDonations(communityId);
+        return ResponseEntity.ok().body(announcements.toString());
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<String> create(@RequestBody Announcement announcement, BindingResult result) {
+        if (result.hasErrors()) {
+            return ResponseEntity.badRequest().body(result.getAllErrors().get(0).getDefaultMessage());
+        }
+        Announcement createdAnnouncement = announcementService.create(announcement);
+        return ResponseEntity.ok().body(createdAnnouncement.toString());
+    }
+
 }

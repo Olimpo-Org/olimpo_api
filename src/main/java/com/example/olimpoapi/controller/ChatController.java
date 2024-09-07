@@ -7,10 +7,7 @@ import com.example.olimpoapi.utils.GsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,7 +21,7 @@ public class ChatController{
         this.chatService = chatService;
         this.gsonUtils = new GsonUtils();
     }
-    @RequestMapping("/create")
+    @PostMapping("/create")
     public ResponseEntity<String> create(@RequestBody Chat chat, BindingResult result) {
         if (result.hasErrors()) {
             return ResponseEntity.badRequest().body(result.getAllErrors().get(0).getDefaultMessage());
@@ -32,13 +29,13 @@ public class ChatController{
         Chat createdChat = chatService.create(chat);
         return ResponseEntity.ok().body(gsonUtils.toJson(createdChat));
     }
-    @RequestMapping("/get")
+    @GetMapping("/get")
     public ResponseEntity<String> getAll() {
         List<Chat> chats = chatService.getAll();
         return ResponseEntity.ok().body(gsonUtils.toJson(chats));
     }
 
-    @RequestMapping("/get/{communityId}")
+    @GetMapping("/get/{communityId}")
     public ResponseEntity<String> getAllOfCommunity(@PathVariable("communityId") String communityId) {
         List<Chat> chats = chatService.getAllByCommunityId(communityId);
         if (chats.isEmpty()) {
@@ -49,7 +46,7 @@ public class ChatController{
         return ResponseEntity.ok().body(gsonUtils.toJson(chats));
     }
 
-    @RequestMapping("/get/{communityId}/{userId}")
+    @GetMapping("/get/{communityId}/{userId}")
     public ResponseEntity<String> getAllOfCommunityByUser(@PathVariable("communityId") String communityId, @PathVariable("userId") String userId) {
         List<Chat> chats = chatService.getAllByUserId(userId, communityId);
         if (chats.isEmpty()) {
@@ -60,7 +57,7 @@ public class ChatController{
         return ResponseEntity.ok().body(gsonUtils.toJson(chats));
     }
 
-    @RequestMapping("/add/{chatId}/{userId}")
+    @PostMapping("/add/{chatId}/{userId}")
     public ResponseEntity<String> addUserToChat(
             @PathVariable("chatId") String chatId,
             @PathVariable("userId") String userId
