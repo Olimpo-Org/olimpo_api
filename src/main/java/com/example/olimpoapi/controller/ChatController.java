@@ -24,7 +24,7 @@ public class ChatController{
     @PostMapping("/create")
     public ResponseEntity<String> create(@RequestBody Chat chat, BindingResult result) {
         if (result.hasErrors()) {
-            return ResponseEntity.badRequest().body(result.getAllErrors().get(0).getDefaultMessage());
+            ExceptionThrower.throwBadRequestException(result.getAllErrors().get(0).getDefaultMessage());
         }
         Chat createdChat = chatService.create(chat);
         return ResponseEntity.ok().body(gsonUtils.toJson(createdChat));

@@ -1,5 +1,6 @@
 package com.example.olimpoapi.controller;
 
+import com.example.olimpoapi.config.exception.ExceptionThrower;
 import com.example.olimpoapi.model.redis.Message;
 import com.example.olimpoapi.service.MessageService;
 import com.example.olimpoapi.utils.GsonUtils;
@@ -23,7 +24,7 @@ public class MessageController {
     @PostMapping("/create")
     public ResponseEntity<String> create(@RequestBody Message message, BindingResult result) {
         if (result.hasErrors()) {
-            return ResponseEntity.badRequest().body(result.getAllErrors().get(0).getDefaultMessage());
+            ExceptionThrower.throwBadRequestException(result.getAllErrors().get(0).getDefaultMessage());
         }
         Message createdMessage = messageService.sendMessage(message);
         return ResponseEntity.ok().body(gsonUtils.toJson(createdMessage));

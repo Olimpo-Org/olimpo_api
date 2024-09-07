@@ -1,5 +1,6 @@
 package com.example.olimpoapi.controller;
 
+import com.example.olimpoapi.config.exception.ExceptionThrower;
 import com.example.olimpoapi.model.mongo.Publication;
 import com.example.olimpoapi.service.PublicationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class PublicationController {
     @PostMapping("/create")
     public ResponseEntity<String> create(@RequestBody Publication publication, BindingResult result) {
         if (result.hasErrors()) {
-            return ResponseEntity.badRequest().body(result.getAllErrors().get(0).getDefaultMessage());
+            ExceptionThrower.throwBadRequestException(result.getAllErrors().get(0).getDefaultMessage());
         }
         Publication createdPublication = publicationService.create(publication);
         return ResponseEntity.ok().body(createdPublication.toString());

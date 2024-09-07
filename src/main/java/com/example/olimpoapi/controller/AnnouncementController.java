@@ -1,5 +1,6 @@
 package com.example.olimpoapi.controller;
 
+import com.example.olimpoapi.config.exception.ExceptionThrower;
 import com.example.olimpoapi.model.mongo.Announcement;
 import com.example.olimpoapi.service.AnnouncementService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,15 @@ public class AnnouncementController {
     @Autowired
     public AnnouncementController(AnnouncementService announcementService) {
         this.announcementService = announcementService;
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<String> create(@RequestBody Announcement announcement, BindingResult result) {
+        if (result.hasErrors()) {
+            ExceptionThrower.throwBadRequestException(result.getAllErrors().get(0).getDefaultMessage());
+        }
+        Announcement createdAnnouncement = announcementService.create(announcement);
+        return ResponseEntity.ok().body(createdAnnouncement.toString());
     }
 
     @GetMapping("/get/services/{communityId}")
@@ -43,14 +53,4 @@ public class AnnouncementController {
         List<Announcement> announcements = announcementService.getAllDonations(communityId);
         return ResponseEntity.ok().body(announcements.toString());
     }
-
-    @PostMapping("/create")
-    public ResponseEntity<String> create(@RequestBody Announcement announcement, BindingResult result) {
-        if (result.hasErrors()) {
-            return ResponseEntity.badRequest().body(result.getAllErrors().get(0).getDefaultMessage());
-        }
-        Announcement createdAnnouncement = announcementService.create(announcement);
-        return ResponseEntity.ok().body(createdAnnouncement.toString());
-    }
-
 }
