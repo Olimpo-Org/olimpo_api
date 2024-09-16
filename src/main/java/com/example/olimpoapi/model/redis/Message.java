@@ -1,30 +1,37 @@
-package com.example.olimpoapi.model.mongo;
+package com.example.olimpoapi.model.redis;
 
-import jakarta.persistence.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.redis.core.index.Indexed;
 
+import java.io.Serializable;
 import java.util.Date;
 
-@Document(collection = "messages")
-public class Message {
+@RedisHash("Message")
+public class Message implements Serializable {
+
     @Id
     private String id;
 
-    @Field("chat_id")
+    @Indexed
     private String chatId;
 
-    @Field("sender_id")
+    @Indexed
     private String senderId;
 
-    @Field("sender_name")
     private String senderName;
 
-    @Field("sended_at")
     private Date sendedAt;
 
-    @Field("content")
     private String content;
+
+    public Message(String chatId, String senderId, String senderName, Date sendedAt, String content) {
+        this.chatId = chatId;
+        this.senderId = senderId;
+        this.senderName = senderName;
+        this.sendedAt = sendedAt;
+        this.content = content;
+    }
 
     public Message() {
     }

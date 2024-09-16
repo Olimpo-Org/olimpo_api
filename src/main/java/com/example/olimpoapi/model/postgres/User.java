@@ -8,37 +8,36 @@ import jakarta.persistence.Table;
 @Table(name = "conta")
 public class User {
     @Id
-    String user_id;
-    String user_email;
+
+    String userId;
+    String userEmail;
     String password;
     String phone;
-    String profile_image;
+    String profileImage;
 
-    public User() {
-    }
-
-    public User(String user_id, String user_email, String password, String phone, String profile_image) {
-        this.user_id = user_id;
-        this.user_email = user_email;
+    public User(String userId, String userEmail, String password, String phone, String profileImage) {
+        this.userId = userId;
+        this.userEmail = userEmail;
         this.password = password;
         this.phone = phone;
-        this.profile_image = profile_image;
+        this.profileImage = profileImage;
+    }
+    public User() {
+    }
+    public String getUserId() {
+        return userId;
     }
 
-    public String getUser_id() {
-        return user_id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public String getUser_email() {
-        return user_email;
-    }
-
-    public void setUser_email(String user_email) {
-        this.user_email = user_email;
+    public void setUserEmail(String user_email) {
+        this.userEmail = user_email;
     }
 
     public String getPassword() {
@@ -57,11 +56,11 @@ public class User {
         this.phone = phone;
     }
 
-    public String getProfile_image() {
-        return profile_image;
+    public String getProfileImage() {
+        return profileImage;
     }
 
-    public void setProfile_image(String profile_image) {
-        this.profile_image = profile_image;
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
     }
 }

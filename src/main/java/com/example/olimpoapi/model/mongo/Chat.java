@@ -1,6 +1,9 @@
 package com.example.olimpoapi.model.mongo;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -10,14 +13,18 @@ import java.util.List;
 @Document(collection = "chats")
 public class Chat {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
+    @NotNull(message = "Community id cannot be null")
     @Field("community_id")
     private String communityId;
 
+    @NotNull(message = "Users ids cannot be null")
     @Field("users_ids")
     private List<String> usersIds;
 
+    @NotNull(message = "Chat name cannot be null")
     @Field("chat_name")
     private String chatName;
 

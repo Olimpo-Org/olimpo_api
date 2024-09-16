@@ -1,9 +1,12 @@
 package com.example.olimpoapi.model.mongo;
 
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.Date;
 import java.util.List;
 
 @Document(collection = "announcements")
@@ -12,35 +15,46 @@ public class Announcement {
     private String id;
 
     @Field("community_id")
+    @NotNull(message = "Community id cannot be null")
     private String communityId;
 
     @Field("sender_id")
+    @NotNull(message = "Sender id cannot be null")
     private String senderId;
 
     @Field("sender_name")
+    @NotNull(message = "Sender name cannot be null")
     private String senderName;
 
     @Field("images")
     private List<String> images;
 
     @Field("description")
+    @NotNull(message = "Description cannot be null")
+    @Max(value = 500, message = "Description cannot be longer than 500 characters")
     private String description;
 
-    @Field("saved")
-    private Boolean saved;
+    @Field("type")
+    @NotNull(message = "Type cannot be null")
+    private String type;
+
+    @Field("sended_at")
+    private Date sendedAt;
+
 
     public Announcement() {
     }
 
     public Announcement(String id, String communityId, String senderId, String senderName,
-                        List<String> images, String description, Boolean saved) {
+                        List<String> images, String description, String type, Date sendedAt) {
         this.id = id;
         this.communityId = communityId;
         this.senderId = senderId;
         this.senderName = senderName;
         this.images = images;
         this.description = description;
-        this.saved = saved;
+        this.type = type;
+        this.sendedAt = sendedAt;
     }
 
     public String getId() {
@@ -91,12 +105,20 @@ public class Announcement {
         this.description = description;
     }
 
-    public Boolean getSaved() {
-        return saved;
+    public String getType() {
+        return type;
     }
 
-    public void setSaved(Boolean saved) {
-        this.saved = saved;
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Date getSendedAt() {
+        return sendedAt;
+    }
+
+    public void setSendedAt(Date sendedAt) {
+        this.sendedAt = sendedAt;
     }
 }
 
