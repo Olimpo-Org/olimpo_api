@@ -20,7 +20,6 @@ public class Message implements Serializable {
     @NotNull(message = "Chat id cannot be null")
     private String chatId;
 
-    @Indexed
     @NotNull(message = "Sender id cannot be null")
     private String senderId;
 

@@ -75,4 +75,8 @@ public class ChatService {
         }
         return chat.get();
     }
+
+    public boolean verifyIfChatExists(String chatId) {
+        return chatRepository.existsById(chatId);
+    }
 }
