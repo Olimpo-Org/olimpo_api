@@ -12,9 +12,14 @@ import java.util.List;
 
 @Document(collection = "chats")
 public class Chat {
-    @Id
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Field("chat_id")
+    private String chatId;
 
     @NotNull(message = "Community id cannot be null")
     @Field("community_id")
@@ -28,26 +33,28 @@ public class Chat {
     @Field("chat_name")
     private String chatName;
 
-    @Field("created_at")
-    private Date createdAt;
+    @NotNull(message = "Chat owners cannot be null")
+    @Field("chat_owners")
+    private List<String> chatOwners;
 
-    @Field("chat_ower_id")
-    private String chatOwnerId;
-
+    @NotNull(message = "Channel type cannot be null")
     @Field("channel_type")
     private String channelType;
+
+    @Field("created_at")
+    private Date createdAt;
 
     public Chat() {
     }
 
-    public Chat(String id, String communityId, List<String> usersIds, String chatName,
-                Date createdAt, String chatOwnerId, String channelType) {
+    public Chat(String id, String chatId, String communityId, List<String> usersIds, String chatName, List<String> chatOwners, Date createdAt, String channelType) {
         this.id = id;
+        this.chatId = chatId;
         this.communityId = communityId;
         this.usersIds = usersIds;
         this.chatName = chatName;
+        this.chatOwners = chatOwners;
         this.createdAt = createdAt;
-        this.chatOwnerId = chatOwnerId;
         this.channelType = channelType;
     }
 
@@ -57,6 +64,14 @@ public class Chat {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getChatId() {
+        return chatId;
+    }
+
+    public void setChatId(String chatId) {
+        this.chatId = chatId;
     }
 
     public String getCommunityId() {
@@ -83,20 +98,20 @@ public class Chat {
         this.chatName = chatName;
     }
 
+    public List<String> getChatOwners() {
+        return chatOwners;
+    }
+
+    public void setChatOwners(List<String> chatOwners) {
+        this.chatOwners = chatOwners;
+    }
+
     public Date getCreatedAt() {
         return createdAt;
     }
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public String getChatOwnerId() {
-        return chatOwnerId;
-    }
-
-    public void setChatOwnerId(String chatOwnerId) {
-        this.chatOwnerId = chatOwnerId;
     }
 
     public String getChannelType() {

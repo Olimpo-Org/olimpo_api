@@ -23,7 +23,6 @@ public class Announcement {
     private String senderId;
 
     @Field("sender_name")
-    @NotNull(message = "Sender name cannot be null")
     private String senderName;
 
     @Field("images")
@@ -31,7 +30,7 @@ public class Announcement {
 
     @Field("description")
     @NotNull(message = "Description cannot be null")
-    @Max(value = 500, message = "Description cannot be longer than 500 characters")
+    @Max(value = 300, message = "Description cannot be longer than 500 characters")
     private String description;
 
     @Field("type")
@@ -40,7 +39,6 @@ public class Announcement {
 
     @Field("sended_at")
     private Date sendedAt;
-
 
     public Announcement() {
     }

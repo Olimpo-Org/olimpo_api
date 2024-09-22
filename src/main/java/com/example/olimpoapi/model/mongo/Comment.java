@@ -1,3 +1,4 @@
+
 package com.example.olimpoapi.model.mongo;
 
 import jakarta.persistence.GeneratedValue;
@@ -13,10 +14,16 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
+    @NotNull(message = "Publication id cannot be null")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Field("publication_id")
+    private String publicationId;
+
     @NotNull(message = "Sender id cannot be null")
     @Field("sender_id")
     private String senderId;
 
+    @NotNull(message = "Sender name cannot be null")
     @Field("sender_name")
     private String senderName;
 
@@ -24,13 +31,18 @@ public class Comment {
     @Field("content")
     private String content;
 
+    @Field("sender_image")
+    private String senderImage;
+
     public Comment() {
     }
-    public Comment(String id, String senderId, String senderName, String content) {
+    public Comment(String id, String publicationId, String senderId, String senderName, String content, String senderImage) {
         this.id = id;
+        this.publicationId = publicationId;
         this.senderId = senderId;
         this.senderName = senderName;
         this.content = content;
+        this.senderImage = senderImage;
     }
 
     public String getId() {
@@ -39,6 +51,15 @@ public class Comment {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+
+    public String getPublicationId() {
+        return publicationId;
+    }
+
+    public void setPublicationId(String publicationId) {
+        this.publicationId = publicationId;
     }
 
     public String getSenderId() {
@@ -63,5 +84,12 @@ public class Comment {
 
     public void setContent(String content) {
         this.content = content;
+    }
+    public String getSenderImage() {
+        return senderImage;
+    }
+
+    public void setSenderImage(String senderImage) {
+        this.senderImage = senderImage;
     }
 }

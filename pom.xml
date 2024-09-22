@@ -58,7 +58,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.7.2</version> <!-- Use the latest version -->
+            <version>42.7.2</version>
         </dependency>
         <!-- DevTools -->
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->

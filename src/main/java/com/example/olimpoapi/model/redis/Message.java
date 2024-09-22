@@ -1,5 +1,9 @@
 package com.example.olimpoapi.model.redis;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.index.Indexed;
@@ -9,27 +13,31 @@ import java.util.Date;
 
 @RedisHash("Message")
 public class Message implements Serializable {
-
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
-    @Indexed
+    @NotNull(message = "Chat id cannot be null")
     private String chatId;
 
     @Indexed
+    @NotNull(message = "Sender id cannot be null")
     private String senderId;
 
+    @NotNull(message = "Sender name cannot be null")
     private String senderName;
 
-    private Date sendedAt;
-
+    @NotNull(message = "Content cannot be null")
+    @Max(message = "Content cannot be longer than 600 characters", value = 600)
     private String content;
+
+    private Date sentdAt;
 
     public Message(String chatId, String senderId, String senderName, Date sendedAt, String content) {
         this.chatId = chatId;
         this.senderId = senderId;
         this.senderName = senderName;
-        this.sendedAt = sendedAt;
+        this.sentdAt = sendedAt;
         this.content = content;
     }
 
@@ -69,11 +77,11 @@ public class Message implements Serializable {
     }
 
     public Date getSendedAt() {
-        return sendedAt;
+        return sentdAt;
     }
 
     public void setSendedAt(Date sendedAt) {
-        this.sendedAt = sendedAt;
+        this.sentdAt = sendedAt;
     }
 
     public String getContent() {

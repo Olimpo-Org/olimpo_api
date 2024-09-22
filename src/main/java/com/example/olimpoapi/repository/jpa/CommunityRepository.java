@@ -1,7 +1,6 @@
 package com.example.olimpoapi.repository.jpa;
 
-import com.example.olimpoapi.model.postgres.Community;
-import org.springframework.data.jpa.repository.JpaRepository;
+//import com.example.olimpoapi.model.postgresql.Community;
 
-public interface CommunityRepository extends JpaRepository<Community, String> {
-}
+//public interface CommunityRepository extends JpaRepository<Community, String> {
+//}

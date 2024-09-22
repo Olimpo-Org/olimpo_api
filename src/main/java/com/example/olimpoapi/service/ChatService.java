@@ -68,4 +68,11 @@ public class ChatService {
         c.setUsersIds(usersIds);
         return chatRepository.save(c);
     }
+    public Chat getChatById(String chatId) {
+        Optional<Chat> chat = chatRepository.findById(chatId);
+        if (chat.isEmpty()) {
+            ExceptionThrower.throwBadRequestException("Chat not found");
+        }
+        return chat.get();
+    }
 }
