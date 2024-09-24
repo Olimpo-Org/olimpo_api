@@ -1,4 +1,4 @@
-package com.example.olimpoapi.controller;
+package com.example.olimpoapi.controller.accessFlow;
 
 //import com.example.olimpoapi.model.postgresql;
 //import com.example.olimpoapi.service.UserService;

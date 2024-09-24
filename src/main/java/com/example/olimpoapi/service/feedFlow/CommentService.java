@@ -1,7 +1,7 @@
-package com.example.olimpoapi.service;
+package com.example.olimpoapi.service.feedFlow;
 
 import com.example.olimpoapi.model.mongo.Comment;
-import com.example.olimpoapi.repository.mongo.CommentRepository;
+import com.example.olimpoapi.repository.feedFlow.CommentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

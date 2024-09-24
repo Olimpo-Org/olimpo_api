@@ -1,9 +1,9 @@
-package com.example.olimpoapi.service;
+package com.example.olimpoapi.service.messageFlow;
 
 import com.example.olimpoapi.config.exception.ExceptionThrower;
 import com.example.olimpoapi.model.redis.Message;
-import com.example.olimpoapi.repository.mongo.ChatRepository;
-import com.example.olimpoapi.repository.redis.MessageRepository;
+import com.example.olimpoapi.repository.messageFlow.ChatRepository;
+import com.example.olimpoapi.repository.messageFlow.MessageRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 

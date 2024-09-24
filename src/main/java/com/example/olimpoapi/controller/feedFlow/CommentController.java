@@ -1,8 +1,8 @@
-package com.example.olimpoapi.controller;
+package com.example.olimpoapi.controller.feedFlow;
 
 import com.example.olimpoapi.config.exception.ExceptionThrower;
 import com.example.olimpoapi.model.mongo.Comment;
-import com.example.olimpoapi.service.CommentService;
+import com.example.olimpoapi.service.feedFlow.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;

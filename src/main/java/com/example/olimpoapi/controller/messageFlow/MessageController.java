@@ -1,8 +1,8 @@
-package com.example.olimpoapi.controller;
+package com.example.olimpoapi.controller.messageFlow;
 
 import com.example.olimpoapi.config.exception.ExceptionThrower;
 import com.example.olimpoapi.model.redis.Message;
-import com.example.olimpoapi.service.MessageService;
+import com.example.olimpoapi.service.messageFlow.MessageService;
 import com.example.olimpoapi.utils.GsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

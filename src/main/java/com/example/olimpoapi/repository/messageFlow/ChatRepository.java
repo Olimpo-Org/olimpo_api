@@ -1,4 +1,4 @@
-package com.example.olimpoapi.repository.mongo;
+package com.example.olimpoapi.repository.messageFlow;
 
 import com.example.olimpoapi.model.mongo.Chat;
 import org.springframework.data.mongodb.core.MongoTemplate;

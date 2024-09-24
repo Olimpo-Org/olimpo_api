@@ -1,4 +1,4 @@
-package com.example.olimpoapi.repository.redis;
+package com.example.olimpoapi.repository.messageFlow;
 
 import com.example.olimpoapi.model.redis.Message;
 import org.springframework.data.repository.CrudRepository;

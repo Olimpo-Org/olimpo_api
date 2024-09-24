@@ -1,8 +1,8 @@
-package com.example.olimpoapi.controller;
+package com.example.olimpoapi.controller.negotiationFlow;
 
 import com.example.olimpoapi.config.exception.ExceptionThrower;
 import com.example.olimpoapi.model.mongo.Announcement;
-import com.example.olimpoapi.service.AnnouncementService;
+import com.example.olimpoapi.service.negotiationFlow.AnnouncementService;
 import com.example.olimpoapi.utils.GsonUtils;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
