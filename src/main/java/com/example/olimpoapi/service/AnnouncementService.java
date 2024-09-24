@@ -14,31 +14,23 @@ public class AnnouncementService {
     }
 
     public Announcement create(Announcement announcement) {
-        return announcementRepository.save(announcement);
-    }
-
-    public List<Announcement> getAllOfCommunity(String communityId) {
-        return announcementRepository.findAllByCommunityId(communityId);
+        return announcementRepository.create(announcement);
     }
 
     public List<Announcement> getAllServices(String communityId) {
-        List<Announcement> announcements = getAllOfCommunity(communityId);
-        announcements.removeIf(announcement -> !announcement.getType().equals("service"));
-        return announcements;
+        return announcementRepository.getAllServicesOfCommunity(communityId);
     }
 
     public List<Announcement> getAllSales(String communityId) {
-        List<Announcement> announcements = getAllOfCommunity(communityId);
-        announcements.removeIf(announcement -> !announcement.getType().equals("sale"));
-        return announcements;
+        return announcementRepository.getAllSalesOfCommunity(communityId);
     }
 
     public List<Announcement> getAllDonations(String communityId) {
-        List<Announcement> announcements = getAllOfCommunity(communityId);
-        announcements.removeIf(announcement -> !announcement.getType().equals("donation"));
-        return announcements;
+        return announcementRepository.getAllDonationsOfCommunity(communityId);
     }
 
-
+    public List<Announcement> getAllOfCommunity(String communityId) {
+        return announcementRepository.getAllOfCommunity(communityId);
+    }
 
 }
