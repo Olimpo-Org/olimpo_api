@@ -2,6 +2,7 @@ package com.example.olimpoapi.service;
 
 import com.example.olimpoapi.model.mongo.Publication;
 import com.example.olimpoapi.repository.mongo.PublicationRepository;
+import com.example.olimpoapi.utils.IdGenerator;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,12 +14,17 @@ public class PublicationService {
         this.publicationRepository = publicationRepository;
     }
     public Publication create(Publication publication) {
-        return publicationRepository.save(publication);
+        IdGenerator idGenerator = new IdGenerator();
+        publication.setPublicationId(idGenerator.generateId());
+        return publicationRepository.create(publication);
     }
+
     public List<Publication> getAllOfCommunity(String communityId) {
-        return publicationRepository.findAllByCommunityId(communityId);
+        return publicationRepository.getAllOfCommunity(communityId);
     }
+
     public boolean verifyIfPublicationExists(String id) {
-        return publicationRepository.existsById(id);
+        return publicationRepository.verifyIfPublicationExists(id);
     }
+
 }

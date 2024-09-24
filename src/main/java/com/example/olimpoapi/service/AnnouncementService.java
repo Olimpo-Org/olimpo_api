@@ -2,6 +2,7 @@ package com.example.olimpoapi.service;
 
 import com.example.olimpoapi.model.mongo.Announcement;
 import com.example.olimpoapi.repository.mongo.AnnouncementRepository;
+import com.example.olimpoapi.utils.IdGenerator;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,8 @@ public class AnnouncementService {
     }
 
     public Announcement create(Announcement announcement) {
+        IdGenerator idGenerator = new IdGenerator();
+        announcement.setAnnouncementId(idGenerator.generateId());
         return announcementRepository.create(announcement);
     }
 
