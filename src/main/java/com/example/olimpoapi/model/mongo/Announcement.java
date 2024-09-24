@@ -3,6 +3,7 @@ package com.example.olimpoapi.model.mongo;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -13,7 +14,7 @@ import java.util.List;
 public class Announcement {
     @Id
     @Field("_id")
-    private String id;
+    private ObjectId id;
 
     @Field("announcement_id")
     private String announcementId;
@@ -42,13 +43,13 @@ public class Announcement {
     @NotNull(message = "Type cannot be null")
     private String type;
 
-    @Field("sended_at")
+    @Field("sent_at")
     private Date sentAt;
 
     public Announcement() {
     }
 
-    public Announcement(String id, String communityId, String senderId, String senderName,
+    public Announcement(ObjectId id, String communityId, String senderId, String senderName,
                         List<String> images, String description, String type, Date sentAt) {
         this.id = id;
         this.communityId = communityId;
@@ -60,11 +61,11 @@ public class Announcement {
         this.sentAt = sentAt;
     }
 
-    public String getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 

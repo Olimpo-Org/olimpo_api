@@ -15,6 +15,9 @@ public class Publication {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
+    @Field("publication_id")
+    private String publicationId;
+
     @NotNull(message = "Community id cannot be null")
     @Field("community_id")
     private String communityId;
@@ -41,7 +44,7 @@ public class Publication {
     @Field("tag")
     private String tag;
 
-    public Publication(String communityId, String senderId, String senderName, List<String> images,
+    public Publication(String communityId, String publicationId,String senderId, String senderName, List<String> images,
                        String description, List<String> likes, String tag) {
         this.communityId = communityId;
         this.senderId = senderId;
@@ -53,6 +56,15 @@ public class Publication {
     }
 
     public Publication() {
+    }
+
+
+    public String getPublicationId() {
+        return publicationId;
+    }
+
+    public void setPublicationId(String publicationId) {
+        this.publicationId = publicationId;
     }
 
     public String getId() {
