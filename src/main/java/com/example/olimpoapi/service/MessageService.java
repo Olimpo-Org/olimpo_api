@@ -26,7 +26,7 @@ public class MessageService {
 
     public Message sendMessage(Message message) {
         try {
-            if (!chatRepository.existsById(message.getChatId())) {
+            if (!chatRepository.verifyIfChatExists(message.getChatId())) {
                 ExceptionThrower.throwBadRequestException("Chat not found");
             }
             return messageRepository.save(message);

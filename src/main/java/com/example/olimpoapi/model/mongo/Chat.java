@@ -1,24 +1,21 @@
 package com.example.olimpoapi.model.mongo;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.annotation.Id;
 
 import java.util.Date;
 import java.util.List;
 
 @Document(collection = "chats")
 public class Chat {
-
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
-
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Field("chat_id")
+    @Field("_id")
+    private ObjectId id;
+
+    @Field("chatId")
     private String chatId;
 
     @NotNull(message = "Community id cannot be null")
@@ -47,24 +44,25 @@ public class Chat {
     public Chat() {
     }
 
-    public Chat(String id, String chatId, String communityId, List<String> usersIds, String chatName, List<String> chatOwners, Date createdAt, String channelType) {
+    public Chat(ObjectId id, String chatId, String communityId, List<String> usersIds, String chatName, List<String> chatOwners, String channelType, Date createdAt) {
         this.id = id;
         this.chatId = chatId;
         this.communityId = communityId;
         this.usersIds = usersIds;
         this.chatName = chatName;
         this.chatOwners = chatOwners;
-        this.createdAt = createdAt;
         this.channelType = channelType;
+        this.createdAt = createdAt;
     }
 
-    public String getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
+
 
     public String getChatId() {
         return chatId;
@@ -106,19 +104,19 @@ public class Chat {
         this.chatOwners = chatOwners;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
     public String getChannelType() {
         return channelType;
     }
 
     public void setChannelType(String channelType) {
         this.channelType = channelType;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }
