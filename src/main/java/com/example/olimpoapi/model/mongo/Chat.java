@@ -1,11 +1,10 @@
 package com.example.olimpoapi.model.mongo;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.annotation.Id;
 
 import java.util.Date;
 import java.util.List;
@@ -13,8 +12,11 @@ import java.util.List;
 @Document(collection = "chats")
 public class Chat {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    @Field("_id")
+    private ObjectId id;
+
+    @Field("chatId")
+    private String chatId;
 
     @NotNull(message = "Community id cannot be null")
     @Field("community_id")
@@ -28,35 +30,46 @@ public class Chat {
     @Field("chat_name")
     private String chatName;
 
-    @Field("created_at")
-    private Date createdAt;
+    @NotNull(message = "Chat owners cannot be null")
+    @Field("chat_owners")
+    private List<String> chatOwners;
 
-    @Field("chat_ower_id")
-    private String chatOwnerId;
-
+    @NotNull(message = "Channel type cannot be null")
     @Field("channel_type")
     private String channelType;
+
+    @Field("created_at")
+    private Date createdAt;
 
     public Chat() {
     }
 
-    public Chat(String id, String communityId, List<String> usersIds, String chatName,
-                Date createdAt, String chatOwnerId, String channelType) {
+    public Chat(ObjectId id, String chatId, String communityId, List<String> usersIds, String chatName, List<String> chatOwners, String channelType, Date createdAt) {
         this.id = id;
+        this.chatId = chatId;
         this.communityId = communityId;
         this.usersIds = usersIds;
         this.chatName = chatName;
-        this.createdAt = createdAt;
-        this.chatOwnerId = chatOwnerId;
+        this.chatOwners = chatOwners;
         this.channelType = channelType;
+        this.createdAt = createdAt;
     }
 
-    public String getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(ObjectId id) {
         this.id = id;
+    }
+
+
+    public String getChatId() {
+        return chatId;
+    }
+
+    public void setChatId(String chatId) {
+        this.chatId = chatId;
     }
 
     public String getCommunityId() {
@@ -83,20 +96,12 @@ public class Chat {
         this.chatName = chatName;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public List<String> getChatOwners() {
+        return chatOwners;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getChatOwnerId() {
-        return chatOwnerId;
-    }
-
-    public void setChatOwnerId(String chatOwnerId) {
-        this.chatOwnerId = chatOwnerId;
+    public void setChatOwners(List<String> chatOwners) {
+        this.chatOwners = chatOwners;
     }
 
     public String getChannelType() {
@@ -105,5 +110,13 @@ public class Chat {
 
     public void setChannelType(String channelType) {
         this.channelType = channelType;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }

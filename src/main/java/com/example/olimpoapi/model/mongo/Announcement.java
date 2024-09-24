@@ -1,8 +1,8 @@
 package com.example.olimpoapi.model.mongo;
 
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -12,7 +12,11 @@ import java.util.List;
 @Document(collection = "announcements")
 public class Announcement {
     @Id
+    @Field("_id")
     private String id;
+
+    @Field("announcement_id")
+    private String announcementId;
 
     @Field("community_id")
     @NotNull(message = "Community id cannot be null")
@@ -23,15 +27,15 @@ public class Announcement {
     private String senderId;
 
     @Field("sender_name")
-    @NotNull(message = "Sender name cannot be null")
     private String senderName;
 
     @Field("images")
+    @NotNull(message = "Images cannot be null")
+    @Size(min = 1, max = 5, message = "Images must have between 1 and 5 elements")
     private List<String> images;
 
     @Field("description")
     @NotNull(message = "Description cannot be null")
-    @Max(value = 500, message = "Description cannot be longer than 500 characters")
     private String description;
 
     @Field("type")
@@ -39,14 +43,13 @@ public class Announcement {
     private String type;
 
     @Field("sended_at")
-    private Date sendedAt;
-
+    private Date sentAt;
 
     public Announcement() {
     }
 
     public Announcement(String id, String communityId, String senderId, String senderName,
-                        List<String> images, String description, String type, Date sendedAt) {
+                        List<String> images, String description, String type, Date sentAt) {
         this.id = id;
         this.communityId = communityId;
         this.senderId = senderId;
@@ -54,7 +57,7 @@ public class Announcement {
         this.images = images;
         this.description = description;
         this.type = type;
-        this.sendedAt = sendedAt;
+        this.sentAt = sentAt;
     }
 
     public String getId() {
@@ -63,6 +66,14 @@ public class Announcement {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getAnnouncementId() {
+        return announcementId;
+    }
+
+    public void setAnnouncementId(String announcementId) {
+        this.announcementId = announcementId;
     }
 
     public String getCommunityId() {
@@ -113,12 +124,12 @@ public class Announcement {
         this.type = type;
     }
 
-    public Date getSendedAt() {
-        return sendedAt;
+    public Date getSentAt() {
+        return sentAt;
     }
 
-    public void setSendedAt(Date sendedAt) {
-        this.sendedAt = sendedAt;
+    public void setSentAt(Date sentAt) {
+        this.sentAt = sentAt;
     }
 }
 

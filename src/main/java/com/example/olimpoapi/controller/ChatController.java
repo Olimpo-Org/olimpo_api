@@ -4,12 +4,14 @@ import com.example.olimpoapi.config.exception.ExceptionThrower;
 import com.example.olimpoapi.model.mongo.Chat;
 import com.example.olimpoapi.service.ChatService;
 import com.example.olimpoapi.utils.GsonUtils;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/chat")
@@ -22,7 +24,8 @@ public class ChatController{
         this.gsonUtils = new GsonUtils();
     }
     @PostMapping("/create")
-    public ResponseEntity<String> create(@RequestBody Chat chat, BindingResult result) {
+    public ResponseEntity<String> create(@Valid @RequestBody Chat chat, BindingResult result) {
+        System.out.println(chat.toString());
         if (result.hasErrors()) {
             ExceptionThrower.throwBadRequestException(result.getAllErrors().get(0).getDefaultMessage());
         }
@@ -35,7 +38,7 @@ public class ChatController{
         return ResponseEntity.ok().body(gsonUtils.toJson(chats));
     }
 
-    @GetMapping("/get/{communityId}")
+    @GetMapping("/getByCommunity/{communityId}")
     public ResponseEntity<String> getAllOfCommunity(@PathVariable("communityId") String communityId) {
         List<Chat> chats = chatService.getAllByCommunityId(communityId);
         if (chats.isEmpty()) {
@@ -57,12 +60,20 @@ public class ChatController{
         return ResponseEntity.ok().body(gsonUtils.toJson(chats));
     }
 
-    @PostMapping("/add/{chatId}/{userId}")
+    @PutMapping("/add/{chatId}/{userId}")
     public ResponseEntity<String> addUserToChat(
             @PathVariable("chatId") String chatId,
             @PathVariable("userId") String userId
     ) {
         Chat chat = chatService.addUserToChat(chatId, userId);
+        return ResponseEntity.ok().body(gsonUtils.toJson(chat));
+    }
+    @GetMapping("/get/{chatId}")
+    public ResponseEntity<String> getChat(@PathVariable("chatId") String chatId) {
+        Chat chat = chatService.getChatById(chatId);
+        if (chat == null) {
+            ExceptionThrower.throwNotFoundException("Chat not found");
+        }
         return ResponseEntity.ok().body(gsonUtils.toJson(chat));
     }
 }

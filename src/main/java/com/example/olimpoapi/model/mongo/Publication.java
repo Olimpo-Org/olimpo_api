@@ -30,29 +30,25 @@ public class Publication {
     private List<String> images;
 
     @NotNull(message = "Description cannot be null")
-    @Max(message = "Description cannot be longer than 500 characters", value = 300)
+    @Max(message = "Description cannot be longer than 300 characters", value = 300)
     @Field("description")
     private String description;
 
     @Field("likes")
     private List<String> likes;
 
-    @Field("comments")
-    private List<Comment> comments;
-
     @NotNull(message = "Tag cannot be null")
     @Field("tag")
     private String tag;
 
     public Publication(String communityId, String senderId, String senderName, List<String> images,
-                       String description, List<String> likes, List<Comment> comments, String tag) {
+                       String description, List<String> likes, String tag) {
         this.communityId = communityId;
         this.senderId = senderId;
         this.senderName = senderName;
         this.images = images;
         this.description = description;
         this.likes = likes;
-        this.comments = comments;
         this.tag = tag;
     }
 
@@ -113,14 +109,6 @@ public class Publication {
 
     public void setLikes(List<String> likes) {
         this.likes = likes;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
     }
 
     public String getTag() {

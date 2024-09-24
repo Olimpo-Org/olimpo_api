@@ -18,4 +18,7 @@ public class PublicationService {
     public List<Publication> getAllOfCommunity(String communityId) {
         return publicationRepository.findAllByCommunityId(communityId);
     }
+    public boolean verifyIfPublicationExists(String id) {
+        return publicationRepository.existsById(id);
+    }
 }

@@ -15,7 +15,6 @@ import java.util.List;
 @RequestMapping("/v1/publication")
 public class PublicationController {
     private final PublicationService publicationService;
-    private Validator validator;
     @Autowired
     public PublicationController(PublicationService publicationService) {
         this.publicationService = publicationService;
