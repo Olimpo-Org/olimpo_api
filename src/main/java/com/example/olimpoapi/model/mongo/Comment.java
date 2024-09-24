@@ -14,16 +14,14 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
-    @NotNull(message = "Publication id cannot be null")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Field("publication_id")
+    @NotNull(message = "Publication id cannot be null")
     private String publicationId;
 
     @NotNull(message = "Sender id cannot be null")
     @Field("sender_id")
     private String senderId;
 
-    @NotNull(message = "Sender name cannot be null")
     @Field("sender_name")
     private String senderName;
 

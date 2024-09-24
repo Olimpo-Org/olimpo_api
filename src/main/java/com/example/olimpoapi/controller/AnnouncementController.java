@@ -8,12 +8,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.validation.Validator;
 import java.util.List;
 
 @RestController
 @RequestMapping("/v1/announcement")
 public class AnnouncementController {
     private final AnnouncementService announcementService;
+    private Validator validator;
     @Autowired
     public AnnouncementController(AnnouncementService announcementService) {
         this.announcementService = announcementService;
@@ -24,7 +26,6 @@ public class AnnouncementController {
         if (result.hasErrors()) {
             ExceptionThrower.throwBadRequestException(result.getAllErrors().get(0).getDefaultMessage());
         }
-        System.out.println(announcement.toString());
         Announcement createdAnnouncement = announcementService.create(announcement);
         return ResponseEntity.ok().body(createdAnnouncement.toString());
     }

@@ -15,6 +15,7 @@ import java.util.List;
 @RequestMapping("/v1/comment")
 public class CommentController {
     private final CommentService commentService;
+    private Validator validator;
     @Autowired
     public CommentController(CommentService commentService) {
         this.commentService = commentService;
