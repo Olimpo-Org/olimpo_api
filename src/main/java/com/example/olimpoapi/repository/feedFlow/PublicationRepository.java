@@ -1,4 +1,4 @@
-package com.example.olimpoapi.repository.mongo;
+package com.example.olimpoapi.repository.feedFlow;
 
 import com.example.olimpoapi.model.mongo.Publication;
 import org.springframework.data.mongodb.core.MongoTemplate;

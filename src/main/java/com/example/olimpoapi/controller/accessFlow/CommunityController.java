@@ -1,4 +1,4 @@
-package com.example.olimpoapi.controller;
+package com.example.olimpoapi.controller.accessFlow;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

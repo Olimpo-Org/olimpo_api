@@ -1,8 +1,8 @@
-package com.example.olimpoapi.controller;
+package com.example.olimpoapi.controller.messageFlow;
 
 import com.example.olimpoapi.config.exception.ExceptionThrower;
 import com.example.olimpoapi.model.mongo.Chat;
-import com.example.olimpoapi.service.ChatService;
+import com.example.olimpoapi.service.messageFlow.ChatService;
 import com.example.olimpoapi.utils.GsonUtils;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/chat")

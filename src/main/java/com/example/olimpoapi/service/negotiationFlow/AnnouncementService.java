@@ -1,7 +1,7 @@
-package com.example.olimpoapi.service;
+package com.example.olimpoapi.service.negotiationFlow;
 
 import com.example.olimpoapi.model.mongo.Announcement;
-import com.example.olimpoapi.repository.mongo.AnnouncementRepository;
+import com.example.olimpoapi.repository.negotiationFlow.AnnouncementRepository;
 import com.example.olimpoapi.utils.IdGenerator;
 import org.springframework.stereotype.Service;
 

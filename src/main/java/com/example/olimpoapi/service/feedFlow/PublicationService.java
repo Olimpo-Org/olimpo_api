@@ -1,7 +1,7 @@
-package com.example.olimpoapi.service;
+package com.example.olimpoapi.service.feedFlow;
 
 import com.example.olimpoapi.model.mongo.Publication;
-import com.example.olimpoapi.repository.mongo.PublicationRepository;
+import com.example.olimpoapi.repository.feedFlow.PublicationRepository;
 import com.example.olimpoapi.utils.IdGenerator;
 import org.springframework.stereotype.Service;
 

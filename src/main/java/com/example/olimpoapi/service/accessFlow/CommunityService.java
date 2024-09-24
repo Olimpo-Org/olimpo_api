@@ -1,4 +1,4 @@
-package com.example.olimpoapi.service;
+package com.example.olimpoapi.service.accessFlow;
 
 //import com.example.olimpoapi.repository.jpa.CommunityRepository;
 import org.springframework.stereotype.Service;

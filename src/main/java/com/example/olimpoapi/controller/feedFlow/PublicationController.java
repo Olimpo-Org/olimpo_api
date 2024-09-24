@@ -1,8 +1,8 @@
-package com.example.olimpoapi.controller;
+package com.example.olimpoapi.controller.feedFlow;
 
 import com.example.olimpoapi.config.exception.ExceptionThrower;
 import com.example.olimpoapi.model.mongo.Publication;
-import com.example.olimpoapi.service.PublicationService;
+import com.example.olimpoapi.service.feedFlow.PublicationService;
 import com.example.olimpoapi.utils.GsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

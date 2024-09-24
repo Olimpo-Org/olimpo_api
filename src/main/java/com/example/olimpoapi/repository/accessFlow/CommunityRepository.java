@@ -1,4 +1,4 @@
-package com.example.olimpoapi.repository.jpa;
+package com.example.olimpoapi.repository.accessFlow;
 
 //import com.example.olimpoapi.model.postgresql.Community;
 

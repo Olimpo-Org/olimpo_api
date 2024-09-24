@@ -1,4 +1,4 @@
-package com.example.olimpoapi.repository.mongo;
+package com.example.olimpoapi.repository.negotiationFlow;
 
 import com.example.olimpoapi.model.mongo.Announcement;
 import org.springframework.data.mongodb.core.MongoTemplate;
