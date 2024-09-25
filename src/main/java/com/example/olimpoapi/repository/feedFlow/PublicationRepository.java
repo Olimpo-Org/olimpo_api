@@ -1,6 +1,7 @@
 package com.example.olimpoapi.repository.feedFlow;
 
 import com.example.olimpoapi.model.mongo.Publication;
+import com.example.olimpoapi.utils.IdGenerator;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -18,7 +19,8 @@ public class PublicationRepository {
     }
 
     public Publication create(Publication publication) {
-        publication.setId(String.valueOf(System.currentTimeMillis()));
+        IdGenerator idGenerator = new IdGenerator();
+        publication.setPublicationId(idGenerator.generateId());
         return mongoTemplate.save(publication);
     }
 
@@ -29,7 +31,7 @@ public class PublicationRepository {
     }
 
     public boolean verifyIfPublicationExists(String id) {
-        return mongoTemplate.exists(Query.query(Criteria.where("id").is(id)), Publication.class);
+        return mongoTemplate.exists(Query.query(Criteria.where("publication_id").is(id)), Publication.class);
     }
 
 }

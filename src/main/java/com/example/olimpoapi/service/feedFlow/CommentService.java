@@ -12,10 +12,12 @@ public class CommentService {
     public CommentService(CommentRepository commentRepository) {
         this.commentRepository = commentRepository;
     }
+
     public Comment create(Comment comment) {
-        return commentRepository.save(comment);
+        return commentRepository.create(comment);
     }
+
     public List<Comment> getAllOfPublication(String publicationId) {
-        return commentRepository.findAllByPublicationId(publicationId);
+        return commentRepository.getAllOfPublication(publicationId);
     }
 }

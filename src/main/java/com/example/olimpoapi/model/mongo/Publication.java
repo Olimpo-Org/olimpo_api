@@ -44,8 +44,9 @@ public class Publication {
     @Field("tag")
     private String tag;
 
-    public Publication(String communityId, String publicationId,String senderId, String senderName, List<String> images,
+    public Publication(String publicationId, String communityId, String senderId, String senderName, List<String> images,
                        String description, List<String> likes, String tag) {
+        this.publicationId = publicationId;
         this.communityId = communityId;
         this.senderId = senderId;
         this.senderName = senderName;
@@ -58,6 +59,13 @@ public class Publication {
     public Publication() {
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getPublicationId() {
         return publicationId;
@@ -65,14 +73,6 @@ public class Publication {
 
     public void setPublicationId(String publicationId) {
         this.publicationId = publicationId;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getCommunityId() {

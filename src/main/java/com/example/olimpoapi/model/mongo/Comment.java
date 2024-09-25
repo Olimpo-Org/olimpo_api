@@ -12,7 +12,11 @@ import org.springframework.data.mongodb.core.mapping.Field;
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Field("_id")
     private String id;
+
+    @Field("comment_id")
+    private String commentId;
 
     @Field("publication_id")
     @NotNull(message = "Publication id cannot be null")
