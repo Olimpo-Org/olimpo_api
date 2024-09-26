@@ -1,7 +1,7 @@
 package com.example.olimpoapi.controller.messageFlow;
 
 import com.example.olimpoapi.config.exception.ExceptionThrower;
-import com.example.olimpoapi.model.redis.Message;
+import com.example.olimpoapi.model.mongo.Message;
 import com.example.olimpoapi.service.messageFlow.MessageService;
 import com.example.olimpoapi.utils.GsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +33,11 @@ public class MessageController {
     public ResponseEntity<String> getAll(@PathVariable("chatId") String chatId) {
         List<Message> messages = messageService.getAllMessagesOfAChat(chatId);
         return ResponseEntity.ok().body(gsonUtils.toJson(messages));
+    }
+
+    @DeleteMapping("/delete/{messageId}")
+    public ResponseEntity<String> delete(@PathVariable("messageId") String messageId) {
+        Message deletedMessage = messageService.deleteMessage(messageId);
+        return ResponseEntity.ok().body(gsonUtils.toJson(deletedMessage));
     }
 }

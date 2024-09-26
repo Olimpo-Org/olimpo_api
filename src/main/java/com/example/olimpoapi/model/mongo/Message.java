@@ -1,54 +1,70 @@
-package com.example.olimpoapi.model.redis;
+package com.example.olimpoapi.model.mongo;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.redis.core.RedisHash;
-import org.springframework.data.redis.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.io.Serializable;
 import java.util.Date;
 
-@RedisHash("Message")
-public class Message implements Serializable {
+@Document(collection = "Message")
+public class Message {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Field("_id")
     private String id;
 
+    @Field("message_id")
+    private String messageId;
+
     @NotNull(message = "Chat id cannot be null")
+    @Field("chat_id")
     private String chatId;
 
     @NotNull(message = "Sender id cannot be null")
+    @Field("sender_id")
     private String senderId;
 
     @NotNull(message = "Sender name cannot be null")
+    @Field("sender_name")
     private String senderName;
 
     @NotNull(message = "Content cannot be null")
-    @Max(message = "Content cannot be longer than 600 characters", value = 600)
+    @Max(value = 600, message = "Content cannot be longer than 600 characters")
+    @Field("content")
     private String content;
 
-    private Date sentdAt;
+    @Field("sent_at")
+    private Date sentAt;
 
-    public Message(String chatId, String senderId, String senderName, Date sendedAt, String content) {
+    // Constructors
+    public Message(String chatId, String senderId, String senderName, String content, Date sentAt) {
         this.chatId = chatId;
         this.senderId = senderId;
         this.senderName = senderName;
-        this.sentdAt = sendedAt;
         this.content = content;
+        this.sentAt = sentAt;
     }
 
     public Message() {
     }
 
+    // Getters and Setters
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
     }
 
     public String getChatId() {
@@ -75,19 +91,19 @@ public class Message implements Serializable {
         this.senderName = senderName;
     }
 
-    public Date getSendedAt() {
-        return sentdAt;
-    }
-
-    public void setSendedAt(Date sendedAt) {
-        this.sentdAt = sendedAt;
-    }
-
     public String getContent() {
         return content;
     }
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Date getSentAt() {
+        return sentAt;
+    }
+
+    public void setSentAt(Date sentAt) {
+        this.sentAt = sentAt;
     }
 }
