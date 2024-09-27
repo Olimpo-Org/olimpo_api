@@ -35,4 +35,16 @@ public class PublicationController {
         return ResponseEntity.ok().body(gsonUtils.toJson(publications));
     }
 
+    @PatchMapping("/like/{publicationId}/{userId}")
+    public ResponseEntity<String> likePublication(@PathVariable("publicationId") String publicationId, @PathVariable("userId") String userId) {
+        List<String> likes = publicationService.likePublication(publicationId, userId);
+        return ResponseEntity.ok().body(gsonUtils.toJson(likes));
+    }
+
+    @PatchMapping ("/unlike/{publicationId}/{userId}")
+    public ResponseEntity<String> unlikePublication(@PathVariable("publicationId") String publicationId, @PathVariable("userId") String userId) {
+        List<String> likes = publicationService.unlikePublication(publicationId, userId);
+        return ResponseEntity.ok().body(gsonUtils.toJson(likes));
+    }
+
 }

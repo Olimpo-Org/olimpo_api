@@ -4,7 +4,7 @@ import com.example.olimpoapi.exception.CustomNotFoundException;
 import com.example.olimpoapi.exception.CustomUnauthorizedException;
 import com.example.olimpoapi.exception.CustomNullPointerException;
 public class ExceptionThrower {
-    private ExceptionThrower() {
+    public ExceptionThrower() {
     }
     public static void throwNotFoundException(String message) {
         throw new CustomNotFoundException(message);

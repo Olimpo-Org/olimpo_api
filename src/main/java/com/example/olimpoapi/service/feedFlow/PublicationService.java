@@ -1,5 +1,6 @@
 package com.example.olimpoapi.service.feedFlow;
 
+import com.example.olimpoapi.config.exception.ExceptionThrower;
 import com.example.olimpoapi.model.mongo.Publication;
 import com.example.olimpoapi.repository.feedFlow.PublicationRepository;
 import com.example.olimpoapi.utils.IdGenerator;
@@ -25,6 +26,14 @@ public class PublicationService {
 
     public boolean verifyIfPublicationExists(String id) {
         return publicationRepository.verifyIfPublicationExists(id);
+    }
+
+    public List<String> likePublication(String publicationId, String userId) {
+        return publicationRepository.likePublication(publicationId, userId);
+    }
+
+    public List<String> unlikePublication(String publicationId, String userId) {
+        return publicationRepository.unlikePublication(publicationId, userId);
     }
 
 }
