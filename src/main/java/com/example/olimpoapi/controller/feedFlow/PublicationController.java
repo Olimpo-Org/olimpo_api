@@ -4,6 +4,8 @@ import com.example.olimpoapi.config.exception.ExceptionThrower;
 import com.example.olimpoapi.model.mongo.Publication;
 import com.example.olimpoapi.service.feedFlow.PublicationService;
 import com.example.olimpoapi.utils.GsonUtils;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -13,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/v1/publication")
+@Tag(name = "Publication", description = "Endpoints for managing publications")
 public class PublicationController {
     private final PublicationService publicationService;
     private final GsonUtils gsonUtils;
@@ -21,8 +24,10 @@ public class PublicationController {
         this.publicationService = publicationService;
         this.gsonUtils = new GsonUtils();
     }
+    @Operation(summary = "Create a new publication")
     @PostMapping("/create")
-    public ResponseEntity<String> create(@RequestBody Publication publication, BindingResult result) {
+    public ResponseEntity<String> create(
+            @RequestBody Publication publication, BindingResult result) {
         if (result.hasErrors()) {
             ExceptionThrower.throwBadRequestException(result.getAllErrors().get(0).getDefaultMessage());
         }
@@ -46,5 +51,4 @@ public class PublicationController {
         List<String> likes = publicationService.unlikePublication(publicationId, userId);
         return ResponseEntity.ok().body(gsonUtils.toJson(likes));
     }
-
 }
