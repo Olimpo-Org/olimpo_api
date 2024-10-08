@@ -1,8 +1,10 @@
 # Build package
 
 FROM maven:3.8.3-openjdk-17 AS build
+WORKDIR /app
 COPY . .
-RUN mvn clean package -DskipTests
+RUN mvn clean package
+RUN ls -l /app/target  # Este comando lista os arquivos no diretório target
 
 # Stage package
 
