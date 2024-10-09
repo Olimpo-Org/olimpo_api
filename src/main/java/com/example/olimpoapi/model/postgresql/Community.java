@@ -1,54 +1,84 @@
-//package com.example.olimpoapi.model.postgres;
-//
-//import jakarta.persistence.Entity;
-//import jakarta.persistence.Id;
-//import jakarta.persistence.Table;
-//import org.apache.catalina.User;
-//import org.springframework.data.mongodb.core.mapping.Document;
-//import org.springframework.data.mongodb.core.mapping.Field;
-//
-//import java.util.List;
-//
-//@Entity
-//@Table(name = "community")
-//public class Community {
-//    @Id
-//    private String id;
-//
-//    private String communityName;
-//
-////    private List<User> users;
-//
-//    public Community() {
-//    }
-//
-//    public Community(String id, String communityName, List<User> users) {
-//        this.id = id;
-//        this.communityName = communityName;
-////        this.users = users;
-//    }
-//
-//    public String getId() {
-//        return id;
-//    }
-//
-//    public void setId(String id) {
-//        this.id = id;
-//    }
-//
-//    public String getCommunityName() {
-//        return communityName;
-//    }
-//
-//    public void setCommunityName(String communityName) {
-//        this.communityName = communityName;
-//    }
-//
-////    public List<User> getUsers() {
-////        return users;
-////    }
-////
-////    public void setUsers(List<User> users) {
-////        this.users = users;
-////    }
-//}
+package com.example.olimpoapi.model.postgresql;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "community")
+public class Community {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotNull(message = "Community name cannot be null")
+    @Column(name = "nome")
+    private String name;
+
+    @NotNull(message = "Initial activity date cannot be null")
+    @Column(name = "data_inicio_atividade")
+    private LocalDate initialActivityDate;
+
+    @NotNull(message = "Neighborhood cannot be null")
+    @Column(name = "bairro")
+    private String neighborhood;
+
+    @NotNull(message = "Id region cannot be null")
+    @Column(name = "id_regiao")
+    private Integer idRegion;
+
+    public Community() {
+    }
+    public Community(
+            Long id,
+            String name,
+            LocalDate initialActivityDate,
+            String neighborhood,
+            Integer idRegion) {
+        this.id = id;
+        this.name = name;
+        this.initialActivityDate = initialActivityDate;
+        this.neighborhood = neighborhood;
+        this.idRegion = idRegion;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public LocalDate getInitialActivityDate() {
+        return initialActivityDate;
+    }
+
+    public void setInitialActivityDate(LocalDate initialActivityDate) {
+        this.initialActivityDate = initialActivityDate;
+    }
+
+    public String getNeighborhood() {
+        return neighborhood;
+    }
+
+    public void setNeighborhood(String neighborhood) {
+        this.neighborhood = neighborhood;
+    }
+
+    public Integer getIdRegion() {
+        return idRegion;
+    }
+
+    public void setIdRegion(Integer idRegion) {
+        this.idRegion = idRegion;
+    }
+}
