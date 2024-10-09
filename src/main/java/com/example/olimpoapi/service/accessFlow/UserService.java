@@ -1,8 +1,14 @@
 package com.example.olimpoapi.service.accessFlow;
-
+//
+//import com.example.olimpoapi.config.exception.ExceptionThrower;
 //import com.example.olimpoapi.model.postgresql.User;
-//import com.example.olimpoapi.repository.jpa.UserRepository;
-
+//import com.example.olimpoapi.model.utils.Login;
+//import com.example.olimpoapi.repository.accessFlow.UserRepository;
+//import org.springframework.stereotype.Service;
+//
+//import java.util.List;
+//import java.util.Optional;
+//
 
 //@Service
 //public class UserService {
@@ -11,19 +17,22 @@ package com.example.olimpoapi.service.accessFlow;
 //        this.userRepository = userRepository;
 //    }
 //
-//    public User login(Login login){
-//        Optional<Login> bdUser = Optional.empty();
-////                getLogin(login.getEmail());
+//    public User save(User user) {
+//        return userRepository.save(user);
+//    }
 //
-//        if (bdUser.isPresent() && bdUser.get().getPassword().equals(login.getPassword())) {
-//            Optional<User> user = userRepository.findByUserEmail(login.getEmail());
-//            if (user.isPresent()) {
-//                return user.get();
-//            }else {
-//                ExceptionThrower.throwNullPointerException("User not found");
+//    public User login(Login login){
+//        Optional<User> dbUser = findByEmail(login.getEmail());
+//        if (dbUser.isPresent()){
+//            User user = dbUser.get();
+//            if (user.getPassword().equals(login.getPassword())){
+//                user.setPassword(null);
+//                return user;
+//            } else {
+//                ExceptionThrower.throwNotFoundException("User not found");
 //            }
 //        } else {
-//            ExceptionThrower.throwBadRequestException("Invalid email or password");
+//            ExceptionThrower.throwNotFoundException("User not found");
 //        }
 //        return null;
 //    }
@@ -34,7 +43,7 @@ package com.example.olimpoapi.service.accessFlow;
 //        }
 //        return users;
 //    }
-//    public User getById(String id) {
+//    public User findById(String id) {
 //        Optional<User> user = userRepository.findById(id);
 //        if(user.isEmpty()) {
 //            ExceptionThrower.throwNotFoundException("User not found");
@@ -42,24 +51,13 @@ package com.example.olimpoapi.service.accessFlow;
 //        return user.get();
 //    }
 //    public Optional<User> findByEmail(String email) {
-//        Optional<User> user = userRepository.findByUserEmail(email);
-//        if(user.isEmpty()) {
+//        Optional<User> user = userRepository.findByEmail(email);
+//        if (user.isEmpty()) {
 //            ExceptionThrower.throwNotFoundException("User not found");
 //        }
 //        return user;
 //    }
-//    public User save(User user) {
-//        return userRepository.save(user);
+//    public boolean verifyIfUserExists(String email) {
+//        return userRepository.existsByEmail(email);
 //    }
-////    public List<User> getByCommunityId(String communityId) {
-////        List<User> users = userRepository.findByCommunityId(communityId);
-////        if(users.isEmpty()) {
-////            ExceptionThrower.throwNotFoundException("Users not found");
-////        }
-////        return users;
-////    }
-////    public Optional<Login> getLogin(String email) {
-////        Optional<Login> login = loginRepository.findById(email);
-////        return login;
-////    }
 //}
