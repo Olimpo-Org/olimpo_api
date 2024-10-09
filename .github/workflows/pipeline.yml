@@ -1,0 +1,43 @@
+name: Java CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Cache Maven packages
+      uses: actions/cache@v2
+
+    - name: Build with Maven
+      run: mvn -B clean install 
+
+    - name: Run tests
+      run: mvn test =
+      
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+    - name: Deploy to development environment
+      run: |
+        echo "Deploying to development environment..."
+        # Comandos para deploy no ambiente de dev, como enviar artefatos ou reiniciar containers
