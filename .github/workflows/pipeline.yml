@@ -25,5 +25,3 @@ jobs:
       with:
         service-id: ${{ secrets.service_ID }}
         api-key: ${{ secrets.API_key }}
-
-#teste da pipeline
