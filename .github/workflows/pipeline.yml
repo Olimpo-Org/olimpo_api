@@ -1,8 +1,8 @@
-name: Deploy - Produção
+name: Deploy - Desenvolvimento
  
 on:
   push:
-    branches: [ "prod" ]
+    branches: [ "dev" ]
  
 jobs:
   build:
