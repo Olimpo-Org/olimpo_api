@@ -5,13 +5,14 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 import jakarta.validation.constraints.NotNull;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "customer")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @NotNull(message = "Email cannot be null")
@@ -47,7 +48,7 @@ public class User {
 
     @NotNull(message = "Birthdate cannot be null")
     @Column(name = "birthdate")
-    private LocalDate birthdate;
+    private Date birthdate;
 
     @NotNull(message = "Profile image cannot be null")
     @Column(name = "profile_image")
@@ -65,7 +66,7 @@ public class User {
             String cpf,
             Integer genderId,
             Integer mainInterestId,
-            LocalDate birthdate,
+            Date birthdate,
             String profileImage
     ) {
         this.id = id;
@@ -144,11 +145,11 @@ public class User {
         this.mainInterestId = mainInterestId;
     }
 
-    public LocalDate getBirthdate() {
+    public Date getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(LocalDate birthdate) {
+    public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;
     }
 

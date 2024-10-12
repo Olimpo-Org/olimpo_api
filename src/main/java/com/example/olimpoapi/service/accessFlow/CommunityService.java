@@ -3,8 +3,10 @@ package com.example.olimpoapi.service.accessFlow;
 import com.example.olimpoapi.config.exception.ExceptionThrower;
 import com.example.olimpoapi.model.postgresql.Community;
 import com.example.olimpoapi.model.postgresql.CommunityUser;
+import com.example.olimpoapi.model.utils.CommunityUserId;
 import com.example.olimpoapi.repository.accessFlow.CommunityRepository;
 import com.example.olimpoapi.repository.accessFlow.CommunityUserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +16,7 @@ import java.util.Optional;
 public class CommunityService {
     private final CommunityRepository communityRepository;
     private final CommunityUserRepository communityUserRepository;
+    @Autowired
     private CommunityService(
             CommunityRepository communityRepository,
             CommunityUserRepository communityUserRepository
@@ -29,7 +32,7 @@ public class CommunityService {
         return communities;
     }
 
-    public Community findById(String id) {
+    public Community findById(Long id) {
         Optional<Community> community = communityRepository.findById(id);
         if(community.isEmpty()) {
             ExceptionThrower.throwNotFoundException("Community not found");
@@ -41,28 +44,32 @@ public class CommunityService {
         return communityRepository.save(community);
     }
 
-    public boolean verifyIfCommunityExists(String id) {
+    public boolean verifyIfCommunityExists(Long id) {
         Optional<Community> community = communityRepository.findById(id);
         if (community.isEmpty()) {
             ExceptionThrower.throwNotFoundException("Community not found");
         }
         return true;
     }
-    public CommunityUser addUserToCommunity(String communityId, String customerId) {
-        CommunityUser communityUser = new CommunityUser(customerId, communityId);
+    public CommunityUser addUserToCommunity(Long communityId, Long customerId) {
+        CommunityUserId communityUserId = new CommunityUserId(customerId, communityId);
+        CommunityUser communityUser = new CommunityUser(communityUserId);
         return communityUserRepository.save(communityUser);
     }
 
-    public CommunityUser removeUserFromCommunity(String communityId, String customerId) {
-        CommunityUser communityUser = communityUserRepository.findByCustomerIdAndCommunityId(customerId, communityId);
+    public CommunityUser removeUserFromCommunity(Long customerId, Long communityId) {
+        CommunityUserId communityUserId = new CommunityUserId(customerId, communityId);
+        CommunityUser communityUser = communityUserRepository
+                .findCommunityUserById(communityUserId);
         if (communityUser == null) {
             ExceptionThrower.throwNotFoundException("CommunityUser not found");
         }
         communityUserRepository.delete(communityUser);
         return communityUser;
     }
-    public boolean verifyIfUserIsInCommunity(String communityId, String customerId) {
-        CommunityUser communityUser = communityUserRepository.findByCustomerIdAndCommunityId(customerId, communityId);
+    public boolean verifyIfUserIsInCommunity(Long customerId, Long communityId) {
+        CommunityUserId communityUserId = new CommunityUserId(customerId, communityId);
+        CommunityUser communityUser = communityUserRepository.findCommunityUserById(communityUserId);
         if (communityUser == null) {
             ExceptionThrower.throwNotFoundException("CommunityUser not found");
         }

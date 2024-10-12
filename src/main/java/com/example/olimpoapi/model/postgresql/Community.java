@@ -2,13 +2,15 @@ package com.example.olimpoapi.model.postgresql;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+
+import java.sql.Date;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "community")
 public class Community {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @NotNull(message = "Community name cannot be null")
@@ -17,7 +19,7 @@ public class Community {
 
     @NotNull(message = "Start date cannot be null")
     @Column(name = "start_date")
-    private LocalDate startDate;
+    private Date startDate;
 
     @NotNull(message = "Neighborhood cannot be null")
     @Column(name = "neighborhood")
@@ -38,7 +40,7 @@ public class Community {
     public Community(
             Long id,
             String name,
-            LocalDate startDate,
+            Date startDate,
             String neighborhood,
             Integer regionId,
             String imageUrl
@@ -67,11 +69,11 @@ public class Community {
         this.name = name;
     }
 
-    public LocalDate getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 

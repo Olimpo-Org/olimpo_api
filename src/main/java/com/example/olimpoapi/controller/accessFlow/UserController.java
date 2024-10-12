@@ -1,6 +1,6 @@
 package com.example.olimpoapi.controller.accessFlow;
 
-
+import com.example.olimpoapi.model.postgresql.Administrator;
 import com.example.olimpoapi.model.postgresql.User;
 import com.example.olimpoapi.model.utils.Login;
 import com.example.olimpoapi.service.accessFlow.UserService;
@@ -36,10 +36,55 @@ public class UserController {
                     userService.getAll()
             );
     }
-    @GetMapping("/get/{id}")
-    public ResponseEntity getById(@PathVariable String id) {
+    @GetMapping("/getById/{id}")
+    public ResponseEntity getById(@PathVariable Long id) {
             return ResponseEntity.ok().body(
                     userService.findById(id)
             );
+    }
+
+    @GetMapping("/getByEmail/{email}")
+    public ResponseEntity getByEmail(@PathVariable String email) {
+        return ResponseEntity.ok().body(
+                userService.findByEmail(email)
+        );
+    }
+
+    @GetMapping("/getByCpf/{cpf}")
+    public ResponseEntity getByCpf(@PathVariable String cpf) {
+        return ResponseEntity.ok().body(
+                userService.findByCpf(cpf)
+        );
+    }
+
+    @GetMapping("/userExists/byEmail/{email}")
+    public ResponseEntity verifyIfUserExistsByEmail(@PathVariable String email) {
+        return ResponseEntity.ok().body(
+                userService.verifyIfUserExistsByEmail(email)
+        );
+    }
+
+    @GetMapping("/userExists/byCpf/{cpf}")
+    public ResponseEntity verifyIfUserExistsByCpf(@PathVariable String cpf) {
+        return ResponseEntity.ok().body(
+                userService.verifyIfUserExistsByCpf(cpf)
+        );
+    }
+
+    @PostMapping("/grantAdministrator")
+    public ResponseEntity grantAdministrator(@RequestBody Administrator administrator) {
+        return ResponseEntity.ok().body(
+                userService.grantAdministrator(administrator)
+        );
+    }
+
+    @GetMapping("/verifyIfIsAdministrator/{customerId}/{communityId}")
+    public ResponseEntity verifyIfIsAdministrator(
+            @PathVariable String customerId,
+            @PathVariable Long communityId
+            ) {
+        return ResponseEntity.ok().body(
+                userService.verifyIfIsAdministrator(customerId, communityId)
+        );
     }
 }
