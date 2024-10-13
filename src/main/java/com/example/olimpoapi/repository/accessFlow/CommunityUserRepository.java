@@ -5,6 +5,9 @@ import com.example.olimpoapi.model.utils.CommunityUserId;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-public interface CommunityUserRepository extends JpaRepository<CommunityUser, Long> {
+import java.util.List;
+
+public interface CommunityUserRepository extends JpaRepository<CommunityUser, CommunityUserId> {
     CommunityUser findCommunityUserById(CommunityUserId communityUserId);
+    List<CommunityUser> findAllByIdCommunityId(Long communityId);
 }

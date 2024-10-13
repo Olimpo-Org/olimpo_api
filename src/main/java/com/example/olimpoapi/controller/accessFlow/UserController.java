@@ -1,11 +1,13 @@
 package com.example.olimpoapi.controller.accessFlow;
 
+import com.example.olimpoapi.config.exception.ExceptionThrower;
 import com.example.olimpoapi.model.postgresql.Administrator;
 import com.example.olimpoapi.model.postgresql.User;
 import com.example.olimpoapi.model.utils.Login;
 import com.example.olimpoapi.service.accessFlow.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,16 +20,19 @@ public class UserController {
     }
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody Login login) {
-            return ResponseEntity.ok().body(
-                    userService.login(login)
-            );
+        return ResponseEntity.ok().body(
+                userService.login(login)
+        );
     }
 
     @PostMapping("/save")
-    public ResponseEntity save(@RequestBody User user) {
-            return ResponseEntity.ok().body(
-                    userService.save(user)
-            );
+    public ResponseEntity save(@RequestBody User user, BindingResult result) {
+        if (result.hasErrors()) {
+            ExceptionThrower.throwBadRequestException(result.getAllErrors().get(0).getDefaultMessage());
+        }
+        return ResponseEntity.ok().body(
+                userService.save(user)
+        );
     }
 
     @GetMapping("/get")
@@ -72,7 +77,10 @@ public class UserController {
     }
 
     @PostMapping("/grantAdministrator")
-    public ResponseEntity grantAdministrator(@RequestBody Administrator administrator) {
+    public ResponseEntity grantAdministrator(@RequestBody Administrator administrator, BindingResult result) {
+        if (result.hasErrors()) {
+            ExceptionThrower.throwBadRequestException(result.getAllErrors().get(0).getDefaultMessage());
+        }
         return ResponseEntity.ok().body(
                 userService.grantAdministrator(administrator)
         );
