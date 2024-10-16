@@ -6,31 +6,34 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "advertising")
+@Table(name = "advertisement")
 public class Advertising {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @NotNull(message = "Description cannot be null")
-    @Column(name = "descricao")
+    @Column(name = "description")
     private String description;
 
     @NotNull(message = "Divulgation date cannot be null")
-    @Column(name = "data_divulgacao")
+    @Column(name = "publication_date")
     private LocalDate divulgationDate;
 
-    @Column(name = "id_categoria_produto")
+    @Column(name = "product_category_id")
     private Integer idCategoryProduct;
 
-    @Column(name = "nome_produto")
+    @Column(name = "product_name")
     private String productName;
 
-    @Column(name = "id_cliente")
-    private Long idClient;
+    @Column(name = "user_id")
+    private Long userId;
 
-    @Column(name = "id_plano")
+    @Column(name = "plan_id")
     private Long idPlan;
+
+    @Column(name = "image")
+    private String imageUrl;
 
     public Advertising() {
     }
@@ -41,15 +44,17 @@ public class Advertising {
             LocalDate divulgationDate,
             Integer idCategoryProduct,
             String productName,
-            Long idClient,
-            Long idPlan) {
+            Long userId,
+            Long idPlan,
+            String imageUrl) {
         this.id = id;
         this.description = description;
         this.divulgationDate = divulgationDate;
         this.idCategoryProduct = idCategoryProduct;
         this.productName = productName;
-        this.idClient = idClient;
+        this.userId = userId;
         this.idPlan = idPlan;
+        this.imageUrl = imageUrl;
     }
 
     public Long getId() {
@@ -92,12 +97,12 @@ public class Advertising {
         this.productName = productName;
     }
 
-    public Long getIdClient() {
-        return idClient;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setIdClient(Long idClient) {
-        this.idClient = idClient;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Long getIdPlan() {
@@ -106,5 +111,13 @@ public class Advertising {
 
     public void setIdPlan(Long idPlan) {
         this.idPlan = idPlan;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

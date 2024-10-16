@@ -2,44 +2,55 @@ package com.example.olimpoapi.model.postgresql;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+
+import java.sql.Date;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "community")
 public class Community {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @NotNull(message = "Community name cannot be null")
-    @Column(name = "nome")
+    @Column(name = "name")
     private String name;
 
-    @NotNull(message = "Initial activity date cannot be null")
-    @Column(name = "data_inicio_atividade")
-    private LocalDate initialActivityDate;
+    @NotNull(message = "Start date cannot be null")
+    @Column(name = "start_date")
+    private Date startDate;
 
     @NotNull(message = "Neighborhood cannot be null")
-    @Column(name = "bairro")
+    @Column(name = "neighborhood")
     private String neighborhood;
 
-    @NotNull(message = "Id region cannot be null")
-    @Column(name = "id_regiao")
-    private Integer idRegion;
+    @NotNull(message = "Region ID cannot be null")
+    @Column(name = "region_id")
+    private Integer regionId;
+
+    @Lob
+    @NotNull(message = "Image cannot be null")
+    @Column(name = "image")
+    private String imageUrl;
 
     public Community() {
     }
+
     public Community(
             Long id,
             String name,
-            LocalDate initialActivityDate,
+            Date startDate,
             String neighborhood,
-            Integer idRegion) {
+            Integer regionId,
+            String imageUrl
+    ) {
         this.id = id;
         this.name = name;
-        this.initialActivityDate = initialActivityDate;
+        this.startDate = startDate;
         this.neighborhood = neighborhood;
-        this.idRegion = idRegion;
+        this.regionId = regionId;
+        this.imageUrl = imageUrl;
     }
 
     public Long getId() {
@@ -58,12 +69,12 @@ public class Community {
         this.name = name;
     }
 
-    public LocalDate getInitialActivityDate() {
-        return initialActivityDate;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setInitialActivityDate(LocalDate initialActivityDate) {
-        this.initialActivityDate = initialActivityDate;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
     public String getNeighborhood() {
@@ -74,11 +85,19 @@ public class Community {
         this.neighborhood = neighborhood;
     }
 
-    public Integer getIdRegion() {
-        return idRegion;
+    public Integer getRegionId() {
+        return regionId;
     }
 
-    public void setIdRegion(Integer idRegion) {
-        this.idRegion = idRegion;
+    public void setRegionId(Integer regionId) {
+        this.regionId = regionId;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
