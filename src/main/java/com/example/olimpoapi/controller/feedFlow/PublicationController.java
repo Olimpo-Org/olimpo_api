@@ -18,7 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/v1/publication")
-@Tag(name = "Publication", description = "Endpoints for managing publications")
+@Tag(name = "Publication", description = "Endpoints de publicação")
 public class PublicationController {
     private final PublicationService publicationService;
     private final GsonUtils gsonUtils;
