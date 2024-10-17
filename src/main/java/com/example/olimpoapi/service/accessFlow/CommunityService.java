@@ -80,12 +80,13 @@ public class CommunityService {
         CommunityUserId communityUserId = new CommunityUserId(customerId, communityId);
         CommunityUser communityUser = communityUserRepository.findCommunityUserById(communityUserId);
         if (communityUser == null) {
-            ExceptionThrower.throwNotFoundException("CommunityUser not found");
+            return false;
         }
         return true;
     }
 
     public List<User> getAllUsersByCommunityId(Long communityId) {
+        if (!verifyIfCommunityExists(communityId)) ExceptionThrower.throwNotFoundException("Community not found");
         List<CommunityUser> communityUsers = communityUserRepository
                 .findAllByIdCommunityId(communityId);
         if (communityUsers.isEmpty()) {
@@ -101,5 +102,21 @@ public class CommunityService {
 
         }
         return users;
+    }
+
+    public List<Community> getAllCommunitiesByUserId(Long customerId) {
+        List<CommunityUser> communityUsers = communityUserRepository
+                .findAllByIdCustomerId(customerId);
+        if (communityUsers.isEmpty()) {
+            ExceptionThrower.throwNotFoundException("CommunityUsers not found");
+        }
+        List<Community> communities = new ArrayList<>();
+        for (CommunityUser communityUser : communityUsers) {
+            Optional<Community> community = communityRepository.findById(communityUser.getId().getCommunityId());
+            if (community.isPresent()) {
+                communities.add(community.get());
+            }
+        }
+        return communities;
     }
 }
