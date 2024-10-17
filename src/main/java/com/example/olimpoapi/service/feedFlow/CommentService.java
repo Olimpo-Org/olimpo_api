@@ -1,5 +1,6 @@
 package com.example.olimpoapi.service.feedFlow;
 
+import com.example.olimpoapi.config.exception.ExceptionThrower;
 import com.example.olimpoapi.model.mongo.Comment;
 import com.example.olimpoapi.repository.feedFlow.CommentRepository;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,12 @@ public class CommentService {
     }
 
     public List<Comment> getAllOfPublication(String publicationId) {
-        return commentRepository.getAllOfPublication(publicationId);
+        List<Comment> comments = commentRepository.getAllOfPublication(publicationId);
+        if (comments.isEmpty()) {
+            ExceptionThrower.throwNotFoundException("Comments not found");
+        }else {
+            return comments;
+        }
+        return null;
     }
 }

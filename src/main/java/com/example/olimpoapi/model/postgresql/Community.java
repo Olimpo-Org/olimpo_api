@@ -9,7 +9,9 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "community")
 public class Community {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -29,7 +31,6 @@ public class Community {
     @Column(name = "region_id")
     private Integer regionId;
 
-    @Lob
     @NotNull(message = "Image cannot be null")
     @Column(name = "image")
     private String imageUrl;

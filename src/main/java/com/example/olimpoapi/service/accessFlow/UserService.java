@@ -32,22 +32,15 @@ public class UserService {
     }
 
     public User login(Login login){
-        Optional<User> dbUser = findByEmail(login.getEmail());
-        if (dbUser.isPresent()){
-            User user = dbUser.get();
-            if (user.getPassword().equals(login.getPassword())){
-                user.setPassword(null);
-                return user;
-            } else {
-                ExceptionThrower.throwNotFoundException("User not found");
-            }
-        } else {
-            ExceptionThrower.throwNotFoundException("User not found");
+        User dbUser = findByEmail(login.getEmail());
+        if(!dbUser.getPassword().equals(login.getPassword())) {
+            ExceptionThrower.throwBadRequestException("Wrong password");
         }
-        return null;
+        return dbUser;
     }
     public List<User> getAll() {
         List<User> users = userRepository.findAll();
+        users.forEach(user -> user.setPassword(null));
         if(users.isEmpty()) {
             ExceptionThrower.throwNotFoundException("Users not found");
         }
@@ -58,22 +51,25 @@ public class UserService {
         if(user.isEmpty()) {
             ExceptionThrower.throwNotFoundException("User not found");
         }
+        user.get().setPassword(null);
         return user.get();
     }
-    public Optional<User> findByEmail(String email) {
+    public User findByEmail(String email) {
         Optional<User> user = userRepository.findByEmail(email);
         if (user.isEmpty()) {
             ExceptionThrower.throwNotFoundException("User not found");
         }
-        return user;
+        user.get().setPassword(null);
+        return user.get();
     }
 
-    public  Optional<User> findByCpf(String cpf) {
+    public User findByCpf(String cpf) {
         Optional<User> user = userRepository.findByCpf(cpf);
         if (user.isEmpty()) {
             ExceptionThrower.throwNotFoundException("User not found");
         }
-        return user;
+        user.get().setPassword(null);
+        return user.get();
     }
     public boolean verifyIfUserExistsByEmail(String email) {
         return userRepository.existsByEmail(email);
