@@ -17,7 +17,6 @@ public class AnnouncementRepository {
         this.mongoTemplate = mongoTemplate;
     }
 
-
     public Announcement create(Announcement announcement) {
         announcement.setAnnouncementId(String.valueOf(System.currentTimeMillis()));
         return mongoTemplate.save(announcement);
@@ -26,6 +25,13 @@ public class AnnouncementRepository {
     public List<Announcement> getAllOfCommunity(String communityId) {
         Query query = new Query();
         query.addCriteria(Criteria.where("communityId").is(communityId));
+        return mongoTemplate.find(query, Announcement.class);
+    }
+
+    public List<Announcement> getAllOfUser(String communityId, String userId) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("communityId").is(communityId));
+        query.addCriteria(Criteria.where("userId").is(userId));
         return mongoTemplate.find(query, Announcement.class);
     }
 

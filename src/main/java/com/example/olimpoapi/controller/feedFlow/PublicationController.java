@@ -3,7 +3,6 @@ package com.example.olimpoapi.controller.feedFlow;
 import com.example.olimpoapi.config.exception.ExceptionThrower;
 import com.example.olimpoapi.model.mongo.Publication;
 import com.example.olimpoapi.service.feedFlow.PublicationService;
-import com.example.olimpoapi.utils.GsonUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -21,28 +20,26 @@ import java.util.List;
 @Tag(name = "Publication", description = "Endpoints de publicação")
 public class PublicationController {
     private final PublicationService publicationService;
-    private final GsonUtils gsonUtils;
     @Autowired
     public PublicationController(PublicationService publicationService) {
         this.publicationService = publicationService;
-        this.gsonUtils = new GsonUtils();
     }
+
     @Operation(summary = "Criar nova publicação" , description = "Endpoint que cria uma nova a partir de um objeto JSON")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Publicação criada com sucesso"),
             @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos")
     })
     @PostMapping("/create")
-    public ResponseEntity<String> create(
+    public ResponseEntity<Publication> create(
             @Parameter(description = "Publicação a ser criada")
             @RequestBody Publication publication, BindingResult result) {
         if (result.hasErrors()) {
             ExceptionThrower.throwBadRequestException(result.getAllErrors().get(0).getDefaultMessage());
         }
         Publication createdPublication = publicationService.create(publication);
-        return ResponseEntity.ok().body(gsonUtils.toJson(createdPublication));
+        return ResponseEntity.ok().body(createdPublication);
     }
-
 
     @Operation(summary = "Listar todas as publicações de uma comunidade", description = "Endpoint lista todas as publicações de uma comunidade")
     @ApiResponses(value = {
@@ -50,12 +47,28 @@ public class PublicationController {
             @ApiResponse(responseCode = "404", description = "Publicações não encontradas")
     })
     @GetMapping("/get/{communityId}")
-    public ResponseEntity<String> getAllOfCommunity(
+    public ResponseEntity<List<Publication>> getAllOfCommunity(
             @Parameter(description = "Id da comunidade")
             @PathVariable("communityId") String communityId
     ) {
         List<Publication> publications = publicationService.getAllOfCommunity(communityId);
-        return ResponseEntity.ok().body(gsonUtils.toJson(publications));
+        return ResponseEntity.ok().body(publications);
+    }
+
+    @Operation(summary = "Listar todas as publicações de um usuário", description = "Endpoint lista todas as publicações de um usuário")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Retorno de uma lista de publicações"),
+            @ApiResponse(responseCode = "404", description = "Publicações não encontradas")
+    })
+    @GetMapping("/get/{communityId}/{userId}")
+    public ResponseEntity<List<Publication>> getAllOfUser(
+            @Parameter(description = "Id da comunidade")
+            @PathVariable("communityId") String communityId,
+            @Parameter(description = "Id do usuário")
+            @PathVariable("userId") String userId
+    ) {
+        List<Publication> publications = publicationService.getAllOfUser(communityId, userId);
+        return ResponseEntity.ok().body(publications);
     }
 
     @Operation(summary = "Dar like uma publicação", description = "Endpoint que faz o like de uma publicação")
@@ -64,14 +77,14 @@ public class PublicationController {
             @ApiResponse(responseCode = "404", description = "Publicação não encontrada")
     })
     @PatchMapping("/like/{publicationId}/{userId}")
-    public ResponseEntity<String> likePublication(
+    public ResponseEntity<List<String>> likePublication(
             @Parameter(description = "Id da publicação")
             @PathVariable("publicationId") String publicationId,
             @Parameter(description = "Id do usuário")
             @PathVariable("userId") String userId
     ) {
         List<String> likes = publicationService.likePublication(publicationId, userId);
-        return ResponseEntity.ok().body(gsonUtils.toJson(likes));
+        return ResponseEntity.ok().body(likes);
     }
 
     @Operation(summary = "Dar dislike uma publicação", description = "Endpoint que faz o dislike de uma publicação")
@@ -80,13 +93,13 @@ public class PublicationController {
             @ApiResponse(responseCode = "404", description = "Publicação não encontrada")
     })
     @PatchMapping ("/unlike/{publicationId}/{userId}")
-    public ResponseEntity<String> unlikePublication(
+    public ResponseEntity<List<String>> unlikePublication(
             @Parameter(description = "Id da publicação")
             @PathVariable("publicationId") String publicationId,
             @Parameter(description = "Id do usuário")
             @PathVariable("userId") String userId
     ) {
         List<String> likes = publicationService.unlikePublication(publicationId, userId);
-        return ResponseEntity.ok().body(gsonUtils.toJson(likes));
+        return ResponseEntity.ok().body(likes);
     }
 }

@@ -20,6 +20,10 @@ public class AnnouncementService {
         return announcementRepository.create(announcement);
     }
 
+    public List<Announcement> getAllOfUser(String communityId, String userId) {
+        return announcementRepository.getAllOfUser(communityId, userId);
+    }
+
     public List<Announcement> getAllServices(String communityId) {
         return announcementRepository.getAllServicesOfCommunity(communityId);
     }

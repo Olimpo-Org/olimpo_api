@@ -33,6 +33,13 @@ public class PublicationRepository {
         return mongoTemplate.find(query, Publication.class);
     }
 
+    public List<Publication> getAllOfUser(String communityId, String userId) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("communityId").is(communityId));
+        query.addCriteria(Criteria.where("userId").is(userId));
+        return mongoTemplate.find(query, Publication.class);
+    }
+
     public boolean verifyIfPublicationExists(String id) {
         return mongoTemplate.exists(Query.query(Criteria.where("publicationId").is(id)), Publication.class);
     }
@@ -64,5 +71,4 @@ public class PublicationRepository {
         update.pull("likes", userId);
         return Objects.requireNonNull(mongoTemplate.findAndModify(query2, update, Publication.class)).getLikes();
     }
-
 }

@@ -4,9 +4,11 @@ import com.example.olimpoapi.config.exception.ExceptionThrower;
 import com.example.olimpoapi.model.postgresql.Community;
 import com.example.olimpoapi.model.postgresql.CommunityUser;
 import com.example.olimpoapi.model.postgresql.User;
+import com.example.olimpoapi.model.redis.Solicitation;
 import com.example.olimpoapi.model.utils.CommunityUserId;
 import com.example.olimpoapi.repository.accessFlow.CommunityRepository;
 import com.example.olimpoapi.repository.accessFlow.CommunityUserRepository;
+import com.example.olimpoapi.repository.accessFlow.SolicitationRepository;
 import com.example.olimpoapi.repository.accessFlow.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,15 +22,18 @@ public class CommunityService {
     private final CommunityRepository communityRepository;
     private final CommunityUserRepository communityUserRepository;
     private final UserRepository userRepository;
+    private final SolicitationRepository solicitationRepository;
     @Autowired
     private CommunityService(
             CommunityRepository communityRepository,
             CommunityUserRepository communityUserRepository,
-            UserRepository userRepository
+            UserRepository userRepository,
+            SolicitationRepository solicitationRepository
     ) {
         this.communityRepository = communityRepository;
         this.communityUserRepository = communityUserRepository;
         this.userRepository = userRepository;
+        this.solicitationRepository = solicitationRepository;
     }
 
     public Community save(Community community) {
@@ -79,10 +84,7 @@ public class CommunityService {
     public boolean verifyIfUserIsInCommunity(Long customerId, Long communityId) {
         CommunityUserId communityUserId = new CommunityUserId(customerId, communityId);
         CommunityUser communityUser = communityUserRepository.findCommunityUserById(communityUserId);
-        if (communityUser == null) {
-            return false;
-        }
-        return true;
+        return communityUser != null;
     }
 
     public List<User> getAllUsersByCommunityId(Long communityId) {
@@ -113,10 +115,34 @@ public class CommunityService {
         List<Community> communities = new ArrayList<>();
         for (CommunityUser communityUser : communityUsers) {
             Optional<Community> community = communityRepository.findById(communityUser.getId().getCommunityId());
-            if (community.isPresent()) {
-                communities.add(community.get());
-            }
+            community.ifPresent(communities::add);
         }
         return communities;
+    }
+
+    public List<Solicitation> getAllSolicitationsByCommunityId(String communityId) {
+        List<Solicitation> o = solicitationRepository
+                .getAllByCommunityId(communityId);
+        if (o == null) {
+            ExceptionThrower.throwNotFoundException("Solicitation not found");
+        }
+        return o;
+    }
+    public Solicitation createSolicitation(Solicitation solicitation) {
+        solicitationRepository.save(solicitation);
+        return solicitation;
+    }
+
+    public void acceptSolicitation(Long solicitationId) {
+        Solicitation solicitation = solicitationRepository
+                .findById(solicitationId);
+        if (solicitation == null) {
+            ExceptionThrower.throwNotFoundException("Solicitation not found");
+        }
+        addUserToCommunity(Long.parseLong(
+                solicitation.getUserId()),
+                Long.parseLong(solicitation.getCommunityId())
+        );
+        solicitationRepository.deleteById(solicitation.getId());
     }
 }
