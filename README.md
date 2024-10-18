@@ -6,7 +6,7 @@ Este projeto implementa uma API RESTful para gerenciar **Usuários** e **Comunid
 
 ### **UserController** (Controlador de Usuário)
 
-| Verbo HTTP | Endpoint | Descrição | Exemplo de Requisição |
+| HTTP | Endpoint | Descrição | Exemplo de Requisição |
 | --- | --- | --- | --- |
 | **POST** | `/v1/user/create` | Cria um novo usuário a partir de um objeto JSON. | **Body**: JSON com os dados do usuário. |
 | **POST** | `/v1/user/login` | Realiza o login de um usuário com email e senha. | **Body**: JSON com os dados de login. |
@@ -18,7 +18,7 @@ Este projeto implementa uma API RESTful para gerenciar **Usuários** e **Comunid
 
 ### **CommunityController** (Controlador de Comunidade)
 
-| Verbo HTTP | Endpoint | Descrição | Exemplo de Requisição |
+| HTTP | Endpoint | Descrição | Exemplo de Requisição |
 | --- | --- | --- | --- |
 | **POST** | `/v1/community/create` | Cria uma nova comunidade. | **Body**: JSON com os dados da comunidade. |
 | **GET** | `/v1/community/getAll` | Lista todas as comunidades cadastradas. | - |
