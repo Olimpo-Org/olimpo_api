@@ -1,4 +1,4 @@
-package com.example.olimpoapi.repository.accessFlow;
+package com.example.olimpoapi.repository;
 
 import com.example.olimpoapi.model.postgresql.User;
 import org.springframework.data.jpa.repository.JpaRepository;
