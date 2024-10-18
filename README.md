@@ -1,4 +1,4 @@
-## Documentação da API - Projeto Olimpo
+## Documentação da API de Acesso🔐
 
 Este projeto implementa uma API RESTful para gerenciar **Usuários** e **Comunidades**. A seguir estão descritos os **endpoints**, os **modelos** envolvidos, e a estratégia de tratamento de exceções usada no projeto.
 
