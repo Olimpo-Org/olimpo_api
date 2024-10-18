@@ -1,10 +1,10 @@
-package com.example.olimpoapi.controller.accessFlow;
+package com.example.olimpoapi.controller;
 
 import com.example.olimpoapi.config.exception.ExceptionThrower;
 import com.example.olimpoapi.model.postgresql.Community;
 import com.example.olimpoapi.model.postgresql.User;
 import com.example.olimpoapi.model.redis.Solicitation;
-import com.example.olimpoapi.service.accessFlow.CommunityService;
+import com.example.olimpoapi.service.CommunityService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

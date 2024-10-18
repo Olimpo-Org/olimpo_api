@@ -1,4 +1,4 @@
-package com.example.olimpoapi.repository.accessFlow;
+package com.example.olimpoapi.repository;
 
 import com.example.olimpoapi.config.exception.ExceptionThrower;
 import com.example.olimpoapi.model.redis.Solicitation;

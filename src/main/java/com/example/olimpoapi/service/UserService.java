@@ -1,11 +1,11 @@
-package com.example.olimpoapi.service.accessFlow;
+package com.example.olimpoapi.service;
 
 import com.example.olimpoapi.config.exception.ExceptionThrower;
 import com.example.olimpoapi.model.postgresql.Administrator;
 import com.example.olimpoapi.model.postgresql.User;
 import com.example.olimpoapi.model.utils.Login;
-import com.example.olimpoapi.repository.accessFlow.AdministratorRepository;
-import com.example.olimpoapi.repository.accessFlow.UserRepository;
+import com.example.olimpoapi.repository.AdministratorRepository;
+import com.example.olimpoapi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
