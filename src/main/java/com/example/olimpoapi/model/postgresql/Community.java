@@ -27,10 +27,6 @@ public class Community {
     @Column(name = "neighborhood")
     private String neighborhood;
 
-    @NotNull(message = "Region ID cannot be null")
-    @Column(name = "region_id")
-    private Integer regionId;
-
     @NotNull(message = "Image cannot be null")
     @Column(name = "image")
     private String imageUrl;
@@ -38,19 +34,11 @@ public class Community {
     public Community() {
     }
 
-    public Community(
-            Long id,
-            String name,
-            Date startDate,
-            String neighborhood,
-            Integer regionId,
-            String imageUrl
-    ) {
+    public Community(Long id, String name, Date startDate, String neighborhood, String imageUrl) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
         this.neighborhood = neighborhood;
-        this.regionId = regionId;
         this.imageUrl = imageUrl;
     }
 
@@ -84,14 +72,6 @@ public class Community {
 
     public void setNeighborhood(String neighborhood) {
         this.neighborhood = neighborhood;
-    }
-
-    public Integer getRegionId() {
-        return regionId;
-    }
-
-    public void setRegionId(Integer regionId) {
-        this.regionId = regionId;
     }
 
     public String getImageUrl() {
