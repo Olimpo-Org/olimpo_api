@@ -15,7 +15,8 @@ public class Solicitation {
             String communityId,
             String userId,
             String userName,
-            String userUrlImage) {
+            String userUrlImage
+    ) {
         this.id = id;
         this.communityId = communityId;
         this.userId = userId;

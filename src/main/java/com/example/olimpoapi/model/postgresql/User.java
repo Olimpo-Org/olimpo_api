@@ -5,9 +5,6 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 import jakarta.validation.constraints.NotNull;
 
-import java.sql.Date;
-import java.time.LocalDate;
-
 @Entity
 @Table(name = "customer")
 public class User {
@@ -40,47 +37,26 @@ public class User {
     @Column(name = "cpf")
     private String cpf;
 
-    @NotNull(message = "Gender ID cannot be null")
-    @Column(name = "gender_id")
-    private Integer genderId;
-
-    @NotNull(message = "Main interest ID cannot be null")
-    @Column(name = "main_interest_id")
-    private Integer mainInterestId;
-
-    @NotNull(message = "Birthdate cannot be null")
-    @Column(name = "birthdate")
-    private Date birthdate;
-
     @NotNull(message = "Profile image cannot be null")
     @Column(name = "profile_image")
     private String profileImage;
 
+    @NotNull(message = "Gender ID cannot be null")
+    @Column(name = "gender_id")
+    private Integer genderId;
+
     public User() {
     }
 
-    public User(
-            Long id,
-            String email,
-            String password,
-            String name,
-            String surname,
-            String cpf,
-            Integer genderId,
-            Integer mainInterestId,
-            Date birthdate,
-            String profileImage
-    ) {
+    public User(Long id, String email, String password, String name, String surname, String cpf, String profileImage, Integer genderId) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.name = name;
         this.surname = surname;
         this.cpf = cpf;
-        this.genderId = genderId;
-        this.mainInterestId = mainInterestId;
-        this.birthdate = birthdate;
         this.profileImage = profileImage;
+        this.genderId = genderId;
     }
 
     public Long getId() {
@@ -131,35 +107,19 @@ public class User {
         this.cpf = cpf;
     }
 
-    public Integer getGenderId() {
-        return genderId;
-    }
-
-    public void setGenderId(Integer genderId) {
-        this.genderId = genderId;
-    }
-
-    public Integer getMainInterestId() {
-        return mainInterestId;
-    }
-
-    public void setMainInterestId(Integer mainInterestId) {
-        this.mainInterestId = mainInterestId;
-    }
-
-    public Date getBirthdate() {
-        return birthdate;
-    }
-
-    public void setBirthdate(Date birthdate) {
-        this.birthdate = birthdate;
-    }
-
     public String getProfileImage() {
         return profileImage;
     }
 
     public void setProfileImage(String profileImage) {
         this.profileImage = profileImage;
+    }
+
+    public Integer getGenderId() {
+        return genderId;
+    }
+
+    public void setGenderId(Integer genderId) {
+        this.genderId = genderId;
     }
 }
