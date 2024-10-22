@@ -30,7 +30,7 @@ public class UserService {
     }
 
     public User login(Login login){
-        User dbUser = findByEmail(login.getEmail());
+        User dbUser = findByEmailWithPassword(login.getEmail());
         if(!dbUser.getPassword().equals(login.getPassword())) {
             ExceptionThrower.throwBadRequestException("Wrong password");
         }
@@ -58,6 +58,14 @@ public class UserService {
             ExceptionThrower.throwNotFoundException("User not found");
         }
         user.get().setPassword(null);
+        return user.get();
+    }
+
+    public User findByEmailWithPassword(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+        if (user.isEmpty()) {
+            ExceptionThrower.throwNotFoundException("User not found");
+        }
         return user.get();
     }
 
