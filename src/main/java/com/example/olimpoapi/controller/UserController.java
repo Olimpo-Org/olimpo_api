@@ -22,6 +22,12 @@ import java.util.List;
 @RequestMapping("/v1/user")
 public class UserController {
     private final UserService userService;
+
+    @GetMapping("/manterApi")
+    public String manterApi() {
+        return "Hello world!";
+    }
+
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
