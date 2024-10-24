@@ -24,8 +24,8 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/manterApi")
-    public String manterApi() {
-        return "Hello world!";
+    public ResponseEntity<String> manterApi() {
+        return ResponseEntity.ok().body("Hello World");
     }
 
     @Autowired
